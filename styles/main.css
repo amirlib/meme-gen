@@ -57,7 +57,7 @@
 }
 
 .editor-canvas-container canvas {
-  margin: 0 auto;
+  margin: 50px auto 0;
 }
 
 .editor-main-container {
@@ -73,7 +73,6 @@
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 1rem;
   height: 15px;
-  padding: 0;
   width: 15px;
 }
 
@@ -120,6 +119,17 @@
   color: inherit;
   content: '+';
   font-family: inherit;
+}
+
+.editor-actions button {
+  background-color: #FF9826;
+  border-radius: 2.25rem;
+  color: white;
+  font-family: roboto-regular, sans-serif;
+  font-size: 1rem;
+  height: auto;
+  padding: 0.5rem 1rem;
+  width: auto;
 }
 
 /* MEDIA QUERIES */
