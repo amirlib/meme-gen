@@ -42,6 +42,45 @@
   height: 100%;
 }
 
+/* editor-modal */
+
+.meme-editor-modal {
+  background-color: white;
+  display: none;
+  position: absolute;
+  top: 50px;
+  width: 100%;
+}
+
+.editor-canvas-container {
+  width: 60%;
+}
+
+.editor-canvas-container canvas {
+  margin: 0 auto;
+}
+
+.editor-main-container {
+  background-color: #F8F8F8;
+  padding: 30px;
+  width: 40%;
+}
+
+.editor-content {
+  border: 1px solid #EBEBEB;
+  border-radius: 10px;
+}
+
+.editor-content input {
+  border: 0;
+  padding: 20px;
+  width: 100%;
+}
+
+.editor-content-actions {
+  border-bottom: 1px solid #DEDEDE;
+}
+
 /* MEDIA QUERIES */
 
 /* LARGE */
