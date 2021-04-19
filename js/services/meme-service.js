@@ -8,7 +8,7 @@ var gImgs = [
 var gMeme = {
   lines: [],
   selectedImgId: 0,
-  selectedLineId: 0,
+  selectedLineId: -1,
 }
 
 function getCurrentMeme() {

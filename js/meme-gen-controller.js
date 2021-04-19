@@ -8,16 +8,13 @@ function onInit() {
 
 function onAddLine() {
   addNewLine();
-
-  const line = getSelectedLine();
-
-  drawTextOnCanvas(line, gCanvas, gCtx);
   updateElAttr('.meme-editor-modal input[name="lineInput"]', 'value', '');
 }
 
 function onChangeLine() {
   incSelectedLineId();
   renderLineInput();
+  renderCanvas();
 }
 
 function onChangeLineInput(txt) {
@@ -55,8 +52,9 @@ function renderCanvas() {
   const meme = getCurrentMeme();
   const img = getImgById(meme.selectedImgId);
 
+  clearCanvas(gCanvas, gCtx);
   drawImgOnCanvas(img.url, gCanvas, gCtx);
-  drawMultiTxtOnCanvas(meme.lines, gCanvas, gCtx);
+  drawMultiTxtOnCanvas(meme.lines, gCanvas, gCtx, meme.selectedLineId);
 }
 
 function onOpenEditor(imgId) {
@@ -76,11 +74,10 @@ function renderModal(imgId) {
 }
 
 function firstCanvasRender(imgUrl) {
-  drawImgOnCanvas(imgUrl, gCanvas, gCtx);
   onAddLine();
   onAddLine();
+  renderCanvas();
   renderLineInput();
-  incSelectedLineId();
 }
 
 function renderLineInput() {
