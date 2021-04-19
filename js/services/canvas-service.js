@@ -1,9 +1,13 @@
+function clearCanvas(canvas, ctx) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+}
+
 function drawImgOnCanvas(imgUrl, canvas, ctx) {
   const img = new Image(450, 450);
 
   img.src = imgUrl;
 
-  ctx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 }
 
 function drawTextOnCanvas(data, canvas, ctx) {
