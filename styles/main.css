@@ -23,6 +23,7 @@
 
 .main-content {
   background-color: #E5E5E5;
+  padding: 20px 10px;
 }
 
 .cards-gallery {
@@ -32,8 +33,8 @@
 /* card */
 
 .card {
-  height: 210px;
-  width: 210px;
+  height: 170px;
+  width: 170px;
 }
 
 .card img {
@@ -41,3 +42,19 @@
   height: 100%;
 }
 
+/* MEDIA QUERIES */
+
+/* LARGE */
+
+@media (min-width: 1020px) {
+  .main-content {
+    padding: 30px;
+  }
+  .cards-gallery {
+    gap: 15px;
+  }
+  .card {
+    height: 210px;
+    width: 210px;
+  }
+}
