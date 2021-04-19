@@ -66,6 +66,14 @@
   width: 40%;
 }
 
+.editor-header button {
+  background-color: white;
+  border: 0;
+  height: 15px;
+  padding: 0;
+  width: 15px;
+}
+
 .editor-content {
   border: 1px solid #EBEBEB;
   border-radius: 10px;

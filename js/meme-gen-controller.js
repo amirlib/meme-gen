@@ -6,20 +6,33 @@ function onInit() {
   gCtx = gCanvas.getContext('2d');
 }
 
+function onChangeLineInput(txt) {
+  updateTxtSelectedLine(txt);
+  renderCanvas();
+}
+
+function renderCanvas() {
+  const meme = getCurrentMeme();
+  const img = getImgById(meme.selectedImgId);
+
+  drawImgOnCanvas(img.url, gCanvas, gCtx);
+  drawMultiTxtOnCanvas(meme.lines, gCanvas, gCtx);
+}
+
 function onOpenEditor(imgId) {
   renderModal(imgId);
 }
 
 function renderModal(imgId) {
-  const img = getImageById(Number.parseInt(imgId));
+  const img = getImgById(Number.parseInt(imgId));
 
   if (!img) return;
 
-  renderCanvas(img.url);
-  updateElStyle('.meme-editor-modal', 'display', 'flex');
+  firstCanvasRender(img.url);
+  updateElStyleAttr('.meme-editor-modal', 'display', 'flex');
 }
 
-function renderCanvas(imgUrl) {
+function firstCanvasRender(imgUrl) {
   drawImgOnCanvas(imgUrl, gCanvas, gCtx);
   onAddLine();
   onAddLine();
@@ -31,4 +44,5 @@ function onAddLine() {
   const line = getLastLine();
 
   drawTextOnCanvas(line, gCanvas, gCtx);
+  updateElAttr('.meme-editor-modal input[name="lineInput"]', 'value', '');
 }

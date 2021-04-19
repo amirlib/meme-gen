@@ -19,3 +19,7 @@ function drawTextOnCanvas(data, canvas, ctx) {
   ctx.fillText(txt, x, top);
   ctx.strokeText(txt, x, top);
 }
+
+function drawMultiTxtOnCanvas(data, canvas, ctx) {
+  data.forEach(element => drawTextOnCanvas(element, canvas, ctx));
+}

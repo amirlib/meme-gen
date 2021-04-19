@@ -7,10 +7,20 @@ var gMeme = {
   selectedLineId: 0,
 }
 
-function getImageById(id) {
+function getCurrentMeme() {
+  return JSON.parse(JSON.stringify(gMeme));
+}
+
+function updateTxtSelectedLine(txt) {
+  gMeme.lines[gMeme.selectedLineId].txt = txt;
+}
+
+function getImgById(id) {
   const img = gImgs.find(img => img.id === id);
 
   if (!img) return;
+
+  gMeme.selectedImgId = img.id;
 
   return JSON.parse(JSON.stringify(img));
 }
@@ -26,6 +36,8 @@ function addNewLine() {
       txt: 'Text here',
     }
   );
+
+  gMeme.selectedLineId = gMeme.lines.length - 1;
 }
 
 function getLineTopValue() {

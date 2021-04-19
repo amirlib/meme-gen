@@ -16,12 +16,15 @@
       </div>
 
       <div class="editor-main-container flex column">
-        <div class="editor-header">
+        <div class="editor-header flex justify-between align-center">
           <h2>Edit Text Lines</h2>
 
           <ul class="editor-nav clean-list flex">
-            <li><a class="" href="#"></a></li>
-            <li><a class="" href="#"></a></li>
+            <li>
+              <button type="button" onclick="onAddLine()">
+                <img src="./images/icons/plus.svg" />
+              </button>
+            </li>
           </ul>
         </div>
 
@@ -32,7 +35,7 @@
             </select>
           </div>
 
-          <input type="text" name="lineInput">
+          <input type="text" name="lineInput" onchange="onChangeLineInput(value)">
         </div>
 
         <div class="editor-stikers-container"></div>
