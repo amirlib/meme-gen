@@ -1,2 +1,20 @@
 @import './fonts.css';
 @import './base.css';
+@import './helpers.css';
+/* COMPONENTS */
+
+/* header */
+
+.main-header {
+  box-shadow: inset 0 -1px 0 #DBDBDB;
+  padding: 9px 20px;
+}
+
+.logo-img {
+  height: 32px;
+  width: 152px;
+}
+
+.main-nav>:not(:first-child) {
+  margin-inline-start: 50px;
+}
