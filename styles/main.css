@@ -67,7 +67,7 @@
 }
 
 .editor-header button {
-  background-color: white;
+  background-color: inherit;
   border: 0;
   height: 15px;
   padding: 0;
@@ -99,7 +99,7 @@
 }
 
 .editor-content-actions button {
-  background-color: white;
+  background-color: inherit;
   border: 0;
   color: #989898;
   font-family: Georgia, 'Times New Roman', Times, serif;
