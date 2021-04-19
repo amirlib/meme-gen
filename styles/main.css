@@ -66,15 +66,22 @@
   width: 40%;
 }
 
-.editor-header button {
+.editor-main-container button {
   background-color: inherit;
   border: 0;
+  color: #989898;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 1rem;
   height: 15px;
   padding: 0;
   width: 15px;
 }
 
-.editor-nav>:not(:first-child) {
+.editor-header {
+  padding: 20px 0;
+}
+
+.editor-header-actions>:not(:first-child) {
   margin-inline-start: 20px;
 }
 
@@ -96,17 +103,6 @@
 
 .editor-content-actions>:not(:first-child) {
   margin-inline-start: 22px;
-}
-
-.editor-content-actions button {
-  background-color: inherit;
-  border: 0;
-  color: #989898;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 1rem;
-  height: 15px;
-  padding: 0;
-  width: 15px;
 }
 
 .editor-content-actions select {

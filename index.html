@@ -19,18 +19,15 @@
         <div class="editor-header flex justify-between align-center">
           <h2>Edit Text Lines</h2>
 
-          <ul class="editor-nav clean-list flex">
-            <li>
-              <button type="button" onclick="onChangeLine()">
-                <img src="./images/icons/changeLine.svg" />
-              </button>
-            </li>
-            <li>
-              <button type="button" onclick="onAddLine()">
-                <img src="./images/icons/plus.svg" />
-              </button>
-            </li>
-          </ul>
+          <div class="editor-header-actions flex">
+            <button type="button" onclick="onLineUp()">↑</button>
+            <button type="button" onclick="onLineDown()">↓</button>
+            <button type="button" onclick="onChangeLine()">⥮</button>
+            <button type="button" onclick="onAddLine()">+</button>
+            <button type="button">
+              <img src="./images/trash.svg" alt="remove line">
+            </button>
+          </div>
         </div>
 
         <div class="editor-content">
