@@ -15,12 +15,16 @@ function updateTxtSelectedLine(txt) {
   gMeme.lines[gMeme.selectedLineId].txt = txt;
 }
 
+function updateSelectedImgId(id) {
+  if (!gImgs.some(img => img.id === id)) return;
+
+  gMeme.selectedImgId = id;
+}
+
 function getImgById(id) {
   const img = gImgs.find(img => img.id === id);
 
   if (!img) return;
-
-  gMeme.selectedImgId = img.id;
 
   return JSON.parse(JSON.stringify(img));
 }

@@ -20,11 +20,14 @@ function renderCanvas() {
 }
 
 function onOpenEditor(imgId) {
-  renderModal(imgId);
+  const id = Number.parseInt(imgId);
+
+  updateSelectedImgId(id);
+  renderModal(id);
 }
 
 function renderModal(imgId) {
-  const img = getImgById(Number.parseInt(imgId));
+  const img = getImgById(imgId);
 
   if (!img) return;
 
