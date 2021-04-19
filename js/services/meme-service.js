@@ -1,3 +1,7 @@
+const DEFAULT_TOP_VALUE = 200;
+const MAX_TOP_VALUE = 380;
+const MIN_TOP_VALUE = 50;
+
 var gImgs = [
   { id: 1, url: './images/memes-bg/1.jpg', keywords: ['funny', 'politics', 'celebrity'] },
 ];
@@ -17,6 +21,14 @@ function updateSelectedLineFontSize(diff) {
   if (size < 10) return;
 
   gMeme.lines[gMeme.selectedLineId].size = size;
+}
+
+function updateSelectedLineTop(diff) {
+  const top = gMeme.lines[gMeme.selectedLineId].top + diff;
+
+  if (top < MIN_TOP_VALUE || top > MAX_TOP_VALUE) return;
+
+  gMeme.lines[gMeme.selectedLineId].top = top;
 }
 
 function updateSelectedLineTxt(txt) {
@@ -54,7 +66,7 @@ function addNewLine() {
       color: 'white',
       font: 'Impact',
       size: 40,
-      top: getLineTopValue(),
+      top: _calcLineTopValue(),
       txt: 'Text here',
     }
   );
@@ -62,13 +74,13 @@ function addNewLine() {
   gMeme.selectedLineId = gMeme.lines.length - 1;
 }
 
-function getLineTopValue() {
-  if (gMeme.lines.length === 0) return 50;
-  if (gMeme.lines.length === 1) return 380;
-
-  return 200;
-}
-
 function getSelectedLine() {
   return JSON.parse(JSON.stringify(gMeme.lines[gMeme.selectedLineId]));
+}
+
+function _calcLineTopValue() {
+  if (gMeme.lines.length === 0) return MIN_TOP_VALUE;
+  if (gMeme.lines.length === 1) return MAX_TOP_VALUE;
+
+  return DEFAULT_TOP_VALUE;
 }

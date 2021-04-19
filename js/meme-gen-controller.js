@@ -26,15 +26,28 @@ function onChangeLineInput(txt) {
 }
 
 function onDecFontSize() {
-  updateFontSize(-2);
+  updateLineFontSize(-2);
 }
 
 function onIncFontSize() {
-  updateFontSize(2);
+  updateLineFontSize(2);
 }
 
-function updateFontSize(diff) {
+function onLineDown() {
+  updateLineTop(10);
+}
+
+function onLineUp() {
+  updateLineTop(-10);
+}
+
+function updateLineFontSize(diff) {
   updateSelectedLineFontSize(diff);
+  renderCanvas();
+}
+
+function updateLineTop(diff) {
+  updateSelectedLineTop(diff);
   renderCanvas();
 }
 
