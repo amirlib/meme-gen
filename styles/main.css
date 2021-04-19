@@ -74,6 +74,10 @@
   width: 15px;
 }
 
+.editor-nav>:not(:first-child) {
+  margin-inline-start: 20px;
+}
+
 .editor-content {
   border: 1px solid #EBEBEB;
   border-radius: 10px;
@@ -87,6 +91,39 @@
 
 .editor-content-actions {
   border-bottom: 1px solid #DEDEDE;
+  padding: 10px 12px;
+}
+
+.editor-content-actions>:not(:first-child) {
+  margin-inline-start: 22px;
+}
+
+.editor-content-actions button {
+  background-color: white;
+  border: 0;
+  color: #989898;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 1rem;
+  height: 15px;
+  padding: 0;
+  width: 15px;
+}
+
+.editor-content-actions select {
+  color: #989898;
+  font-size: .75rem;
+}
+
+.btn-dec-font-size::after {
+  color: inherit;
+  content: '-';
+  font-family: inherit;
+}
+
+.btn-inc-font-size::after {
+  color: inherit;
+  content: '+';
+  font-family: inherit;
 }
 
 /* MEDIA QUERIES */

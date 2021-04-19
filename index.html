@@ -21,6 +21,11 @@
 
           <ul class="editor-nav clean-list flex">
             <li>
+              <button type="button" onclick="onChangeLine()">
+                <img src="./images/icons/changeLine.svg" />
+              </button>
+            </li>
+            <li>
               <button type="button" onclick="onAddLine()">
                 <img src="./images/icons/plus.svg" />
               </button>
@@ -33,6 +38,9 @@
             <select name="lineFont">
               <option value="Impact">Impact</option>
             </select>
+
+            <button type="button" class="btn-dec-font-size" onclick="onDecFontSize()">A</button>
+            <button type="button" class="btn-inc-font-size" onclick="onIncFontSize()">A</button>
           </div>
 
           <input type="text" name="lineInput" onchange="onChangeLineInput(value)">

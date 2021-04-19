@@ -6,8 +6,35 @@ function onInit() {
   gCtx = gCanvas.getContext('2d');
 }
 
+function onAddLine() {
+  addNewLine();
+
+  const line = getSelectedLine();
+
+  drawTextOnCanvas(line, gCanvas, gCtx);
+  updateElAttr('.meme-editor-modal input[name="lineInput"]', 'value', '');
+}
+
+function onChangeLine() {
+  incSelectedLineId();
+  renderLineInput();
+}
+
 function onChangeLineInput(txt) {
-  updateTxtSelectedLine(txt);
+  updateSelectedLineTxt(txt);
+  renderCanvas();
+}
+
+function onDecFontSize() {
+  updateFontSize(-2);
+}
+
+function onIncFontSize() {
+  updateFontSize(2);
+}
+
+function updateFontSize(diff) {
+  updateSelectedLineFontSize(diff);
   renderCanvas();
 }
 
@@ -39,13 +66,13 @@ function firstCanvasRender(imgUrl) {
   drawImgOnCanvas(imgUrl, gCanvas, gCtx);
   onAddLine();
   onAddLine();
+  renderLineInput();
 }
 
-function onAddLine() {
-  addNewLine();
+function renderLineInput() {
+  const line = getSelectedLine();
 
-  const line = getLastLine();
+  if (!line) return;
 
-  drawTextOnCanvas(line, gCanvas, gCtx);
-  updateElAttr('.meme-editor-modal input[name="lineInput"]', 'value', '');
+  updateElAttr('.meme-editor-modal input[name="lineInput"]', 'value', line.txt);
 }

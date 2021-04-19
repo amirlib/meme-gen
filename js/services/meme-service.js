@@ -11,7 +11,15 @@ function getCurrentMeme() {
   return JSON.parse(JSON.stringify(gMeme));
 }
 
-function updateTxtSelectedLine(txt) {
+function updateSelectedLineFontSize(diff) {
+  const size = gMeme.lines[gMeme.selectedLineId].size + diff;
+
+  if (size < 10) return;
+
+  gMeme.lines[gMeme.selectedLineId].size = size;
+}
+
+function updateSelectedLineTxt(txt) {
   gMeme.lines[gMeme.selectedLineId].txt = txt;
 }
 
@@ -19,6 +27,16 @@ function updateSelectedImgId(id) {
   if (!gImgs.some(img => img.id === id)) return;
 
   gMeme.selectedImgId = id;
+}
+
+function incSelectedLineId() {
+  if (gMeme.lines.length === 0) return;
+
+  if (gMeme.selectedLineId + 1 === gMeme.lines.length) {
+    gMeme.selectedLineId = 0;
+  } else {
+    gMeme.selectedLineId++;
+  }
 }
 
 function getImgById(id) {
@@ -51,10 +69,6 @@ function getLineTopValue() {
   return 200;
 }
 
-function getLastLine() {
-  if (gMeme.lines.length === 0) return null;
-
-  const line = gMeme.lines[gMeme.lines.length - 1];
-
-  return JSON.parse(JSON.stringify(line));
+function getSelectedLine() {
+  return JSON.parse(JSON.stringify(gMeme.lines[gMeme.selectedLineId]));
 }
