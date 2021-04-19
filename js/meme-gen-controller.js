@@ -80,6 +80,7 @@ function firstCanvasRender(imgUrl) {
   onAddLine();
   onAddLine();
   renderLineInput();
+  incSelectedLineId();
 }
 
 function renderLineInput() {
