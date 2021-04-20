@@ -156,14 +156,18 @@ body.modal-open .main-screen {
   margin-inline-start: 16px;
 }
 
+.editor-content-actions>:first-child {
+  flex: 1;
+}
+
 .editor-content-actions>:last-child {
   margin-inline-end: 16px;
 }
 
 .editor-content-actions select {
   color: #989898;
-  flex: 1;
   font-size: .75rem;
+  width: 100px;
 }
 
 .btn-dec-font-size::after {
