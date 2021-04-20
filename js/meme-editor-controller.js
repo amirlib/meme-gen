@@ -102,9 +102,8 @@ function renderCanvas() {
 
   img.src = imgMeme.url;
 
-  clearCanvas(gCanvas, gCtx);
-
   img.onload = () => {
+    clearCanvas(gCanvas, gCtx);
     drawImgOnCanvas(img, gCanvas, gCtx);
     drawMultiTxtOnCanvas(meme.lines, gCanvas, gCtx, meme.selectedLineId);
   };
