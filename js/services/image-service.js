@@ -206,9 +206,13 @@ function getDisplayKeywords() {
 function filterImgs() {
   if (!gFilter) return gImgs;
 
-  return gImgs.filter(img => {
+  const result = gImgs.filter(img => {
     return img.keywords.some(obj => obj.key.startsWith(gFilter));
   });
+
+  if (result.length !== 0 && gKeywords[gFilter]) gKeywords[gFilter].clicks++;
+
+  return result;
 }
 
 function getImgById(id) {

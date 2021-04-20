@@ -4,7 +4,6 @@ const GALLERY_SELECTOR = '.cards-gallery';
 function onInit() {
   initKeywords();
   initEditor();
-  renderFilterList();
   renderGallery();
 }
 
@@ -35,10 +34,22 @@ function renderGallery() {
   });
 
   elGallery.innerHTML = strHTML.join('');
+
+  renderFilterList();
+}
+
+function renderSearchBar(filter) {
+  updateElAttr('input[name="filterMeme"]', 'value', filter);
 }
 
 function onFilterMeme(filter) {
   changeImgFiler(filter);
+  renderGallery();
+}
+
+function onFilterSearch(filter) {
+  changeImgFiler(filter);
+  renderSearchBar(filter);
   renderGallery();
 }
 
