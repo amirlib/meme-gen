@@ -2,9 +2,6 @@ const DEFAULT_TOP_VALUE = 200;
 const MAX_TOP_VALUE = 380;
 const MIN_TOP_VALUE = 50;
 
-var gImgs = [
-  { id: 1, url: './images/memes-bg/1.jpg', keywords: ['funny', 'politics', 'celebrity'] },
-];
 var gMeme = getDefaultMemeObj();
 
 function addNewLine() {
@@ -65,7 +62,7 @@ function updateSelectedLineTxt(txt) {
 }
 
 function updateSelectedImgId(id) {
-  if (!gImgs.some(img => img.id === id)) return;
+  if (!isImgExists(id)) return
 
   gMeme.selectedImgId = id;
 }
@@ -90,14 +87,6 @@ function getDefaultMemeObj() {
     selectedImgId: 0,
     selectedLineId: -1,
   }
-}
-
-function getImgById(id) {
-  const img = gImgs.find(img => img.id === id);
-
-  if (!img) return;
-
-  return JSON.parse(JSON.stringify(img));
 }
 
 function getSelectedLine() {

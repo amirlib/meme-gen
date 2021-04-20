@@ -5,12 +5,8 @@ function clearCanvas(canvas, ctx) {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 }
 
-function drawImgOnCanvas(imgUrl, canvas, ctx) {
-  const img = new Image(450, 450);
-
-  img.src = imgUrl;
-
-  gCtx.drawImage(img, 0, 0, canvas.width, canvas.height);
+function drawImgOnCanvas(img, canvas, ctx) {
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 }
 
 function drawLineOnCanvas(startX, startY, endX, endY, ctx, dash = []) {

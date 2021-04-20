@@ -3,15 +3,14 @@ const EDITOR_SELECTOR = '.meme-editor-modal';
 var gCanvas;
 var gCtx;
 
-function onInit() {
+function initEditor() {
   gCanvas = document.querySelector('.meme-editor-modal canvas');
   gCtx = gCanvas.getContext('2d');
 }
 
 function onAddLine() {
   addNewLine();
-  renderCanvas();
-  renderLineInput();
+  renderEditor();
 }
 
 function onAlignLeft() {
@@ -28,13 +27,12 @@ function onAlignRight() {
 
 function onChangeFontColor(color) {
   updateSelectedLineFontColor(color);
-  renderCanvas();
+  renderEditor();
 }
 
 function onChangeLine() {
   incSelectedLineId();
-  renderLineInput();
-  renderCanvas();
+  renderEditor();
 }
 
 function onChangeLineInput(txt) {
@@ -78,15 +76,6 @@ function updateLineTop(diff) {
   renderCanvas();
 }
 
-function renderCanvas() {
-  const meme = getCurrentMeme();
-  const img = getImgById(meme.selectedImgId);
-
-  clearCanvas(gCanvas, gCtx);
-  drawImgOnCanvas(img.url, gCanvas, gCtx);
-  drawMultiTxtOnCanvas(meme.lines, gCanvas, gCtx, meme.selectedLineId);
-}
-
 function onCloseEditor() {
   updateElStyleAttr(EDITOR_SELECTOR, 'display', 'none');
   clearMeme();
@@ -106,19 +95,29 @@ function onOpenEditor(imgId) {
   renderModal(id);
 }
 
-function renderModal(imgId) {
-  const img = getImgById(imgId);
+function renderCanvas() {
+  const meme = getCurrentMeme();
+  const imgMeme = getImgById(meme.selectedImgId);
+  const img = new Image(450, 450);
 
-  if (!img) return;
+  img.src = imgMeme.url;
 
-  firstCanvasRender(img.url);
-  updateElStyleAttr(EDITOR_SELECTOR, 'display', 'flex');
+  clearCanvas(gCanvas, gCtx);
+
+  img.onload = () => {
+    drawImgOnCanvas(img, gCanvas, gCtx);
+    drawMultiTxtOnCanvas(meme.lines, gCanvas, gCtx, meme.selectedLineId);
+  };
 }
 
-function firstCanvasRender(imgUrl) {
-  onAddLine();
-  onAddLine();
+function renderEditor() {
   renderCanvas();
+  renderLineInput();
+}
+
+function renderModal() {
+  _firstCanvasRender();
+  updateElStyleAttr(EDITOR_SELECTOR, 'display', 'flex');
 }
 
 function renderLineInput() {
@@ -127,4 +126,10 @@ function renderLineInput() {
   if (!line) return;
 
   updateElAttr(`${EDITOR_SELECTOR} input[name="lineInput"]`, 'value', line.txt);
+}
+
+function _firstCanvasRender() {
+  addNewLine();
+  addNewLine();
+  renderEditor();
 }
