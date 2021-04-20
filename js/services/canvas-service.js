@@ -49,6 +49,13 @@ function getCanvasData(canvas) {
   return canvas.toDataURL();
 }
 
+function resizeCanvas(canvas, size) {
+  const { height, width } = size;
+
+  canvas.height = height;
+  canvas.width = width;
+}
+
 function _calcTextLeftValue(align, txt, canvas, ctx) {
   if (align === 'left') return PADDING_VALUE;
 

@@ -48,13 +48,14 @@
 .meme-editor-modal {
   background-color: white;
   display: none;
+  flex-direction: column;
   position: absolute;
   top: 50px;
   width: 100%;
 }
 
 .editor-canvas-container {
-  width: 60%;
+  width: 100%;
 }
 
 .editor-canvas-container canvas {
@@ -64,7 +65,7 @@
 .editor-main-container {
   background-color: #F8F8F8;
   padding: 30px;
-  width: 40%;
+  width: 100%;
 }
 
 .editor-main-container button {

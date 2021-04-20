@@ -1,4 +1,5 @@
 const EDITOR_SELECTOR = '.meme-editor-modal';
+const MAX_IMAGE_HEIGHT = 450;
 
 var gCanvas;
 var gCtx;
@@ -98,11 +99,13 @@ function onOpenEditor(imgId) {
 function renderCanvas() {
   const meme = getCurrentMeme();
   const imgMeme = getImgById(meme.selectedImgId);
-  const img = new Image(450, 450);
+  const img = new Image();
 
   img.src = imgMeme.url;
   img.onload = () => {
-    clearCanvas(gCanvas, gCtx);
+    const size = _calcCanvasDimensions(img.width, img.height);
+
+    resizeCanvas(gCanvas, size);
     drawImgOnCanvas(img, gCanvas, gCtx);
     drawMultiTxtOnCanvas(meme.lines, gCanvas, gCtx, meme.selectedLineId);
   };
@@ -124,6 +127,14 @@ function renderLineInput() {
   if (!line) return;
 
   updateElAttr(`${EDITOR_SELECTOR} input[name="lineInput"]`, 'value', line.txt);
+}
+
+function _calcCanvasDimensions(srcWidth, srcHeight) {
+  const elContainer = document.querySelector('.editor-canvas-container');
+  const maxHeight = MAX_IMAGE_HEIGHT > elContainer.offsetHeight ? elContainer.offsetHeight : MAX_IMAGE_HEIGHT;
+  const maxWidth = elContainer.offsetWidth;
+
+  return calcImgDimensions(srcWidth, srcHeight, maxWidth, maxHeight);
 }
 
 function _firstCanvasRender() {
