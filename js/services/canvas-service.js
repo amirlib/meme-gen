@@ -49,6 +49,10 @@ function drawMultiTxtOnCanvas(data, canvas, ctx, highlightTextId = -1) {
   });
 }
 
+function getCanvasData(canvas) {
+  return canvas.toDataURL();
+}
+
 function _calcTextLeftValue(align, txt, canvas, ctx) {
   if (align === 'left') return PADDING_VALUE;
 

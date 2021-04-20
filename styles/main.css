@@ -126,7 +126,7 @@
   font-family: inherit;
 }
 
-.editor-actions button {
+.editor-actions .btn-action {
   background-color: #FF9826;
   border-radius: 2.25rem;
   color: white;

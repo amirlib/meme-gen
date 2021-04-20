@@ -92,6 +92,13 @@ function onCloseEditor() {
   clearMeme();
 }
 
+function onDownloadMeme(el) {
+  const meme = getCanvasData(gCanvas);
+
+  el.href = meme;
+  el.download = 'my-meme';
+}
+
 function onOpenEditor(imgId) {
   const id = Number.parseInt(imgId);
 
