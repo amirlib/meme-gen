@@ -159,7 +159,17 @@
 
 /* LARGE */
 
-@media (min-width: 992px) {}
+@media (min-width: 992px) {
+  .meme-editor-modal {
+    flex-direction: row;
+  }
+  .editor-canvas-container {
+    width: 60%;
+  }
+  .editor-main-container {
+    width: 40%;
+  }
+}
 
 /* X-LARGE */
 
