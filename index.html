@@ -79,8 +79,11 @@
       </ul>
     </header>
 
-    <main class="main-content">
-      <section class="search-section"></section>
+    <main class="main-content flex column">
+      <section class="search-section">
+        <input type="text" name="searchMeme" placeholder="Search" onkeyup="onFilterMeme(value)">
+      </section>
+
       <section class="cards-gallery flex wrap justify-center"></section>
     </main>
 

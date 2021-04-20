@@ -26,6 +26,16 @@ var gImgs = [
   { id: 25, url: './images/memes/X-Everywhere.jpg', size: { height: 380, width: 500 }, keywords: ['movie', 'toys', 'scary'] },
 ];
 
+var gFilter = '';
+
+function filterImgs() {
+  if (!gFilter) return gImgs;
+
+  return gImgs.filter(img => {
+    return img.keywords.some(key => key.startsWith(gFilter));
+  });
+}
+
 function getImgById(id) {
   const img = gImgs.find(img => img.id === id);
 
@@ -35,9 +45,15 @@ function getImgById(id) {
 }
 
 function getImgs() {
-  return JSON.parse(JSON.stringify(gImgs));
+  const filtered = filterImgs();
+
+  return JSON.parse(JSON.stringify(filtered));
 }
 
 function isImgExists(id) {
   return gImgs.some(img => img.id === id);
+}
+
+function changeImgFiler(filter) {
+  gFilter = filter.trim().split(' ')[0];
 }

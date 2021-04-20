@@ -26,6 +26,20 @@
   padding: 20px 10px;
 }
 
+.search-section {
+  padding-bottom: 20px;
+}
+
+.search-section input {
+  border: 1px #E5E5E5 solid;
+  border-radius: 81px;
+  color: #989898;
+  display: block;
+  padding: 12px 24px;
+  width: 100%;
+  outline: none;
+}
+
 .cards-gallery {
   gap: 20px;
 }
@@ -150,6 +164,9 @@
 @media (min-width: 768px) {
   .main-content {
     padding: 30px;
+  }
+  .search-section {
+    padding-bottom: 30px;
   }
   .card {
     height: 210px;

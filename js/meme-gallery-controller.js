@@ -17,3 +17,8 @@ function renderGallery() {
 
   elGallery.innerHTML = strHTML.join('');
 }
+
+function onFilterMeme(filter) {
+  changeImgFiler(filter);
+  renderGallery();
+}
