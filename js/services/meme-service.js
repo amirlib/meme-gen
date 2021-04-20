@@ -1,6 +1,4 @@
-const DEFAULT_TOP_VALUE = 200;
-const MAX_TOP_VALUE = 380;
-const MIN_TOP_VALUE = 50;
+const MIN_TOP_VALUE = 30;
 
 var gMeme = getDefaultMemeObj();
 
@@ -104,7 +102,11 @@ function getSelectedLine() {
 
 function _calcLineTopValue() {
   if (gMeme.lines.length === 0) return MIN_TOP_VALUE;
-  if (gMeme.lines.length === 1) return MAX_TOP_VALUE;
 
-  return DEFAULT_TOP_VALUE;
+  const img = getImgById(gMeme.selectedImgId);
+  const canvasSize = calcCanvasDimensions(img.size.width, img.size.height);
+
+  if (gMeme.lines.length === 1) return canvasSize.height - MIN_TOP_VALUE;
+
+  return canvasSize.height / 2;
 }

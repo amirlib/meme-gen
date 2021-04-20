@@ -1,8 +1,17 @@
+const CANVAS_CONTAINER_SELECTOR = '.editor-canvas-container';
 const HIGHLIGHT_COLOR = 'red';
 const PADDING_VALUE = 20;
 
 function clearCanvas(canvas, ctx) {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
+}
+
+function calcCanvasDimensions(srcWidth, srcHeight) {
+  const elContainer = document.querySelector(CANVAS_CONTAINER_SELECTOR);
+  const maxHeight = MAX_IMAGE_HEIGHT > elContainer.offsetHeight ? elContainer.offsetHeight : MAX_IMAGE_HEIGHT;
+  const maxWidth = elContainer.offsetWidth;
+
+  return calcImgDimensions(srcWidth, srcHeight, maxWidth, maxHeight);
 }
 
 function drawImgOnCanvas(img, canvas, ctx) {
@@ -28,6 +37,7 @@ function drawTextOnCanvas(data, canvas, ctx, highlight = false) {
   ctx.strokeStyle = highlight ? HIGHLIGHT_COLOR : stroke;
   ctx.fillStyle = color;
   ctx.font = `${size}px ${font}`;
+  ctx.textBaseline = 'middle';
 
   const x = left === -1 ? _calcTextLeftValue(align, txt, canvas, ctx) : left;
 

@@ -108,7 +108,7 @@ function renderCanvas() {
 
   img.src = imgMeme.url;
   img.onload = () => {
-    const size = _calcCanvasDimensions(img.width, img.height);
+    const size = calcCanvasDimensions(img.width, img.height);
 
     resizeCanvas(gCanvas, size);
     drawImgOnCanvas(img, gCanvas, gCtx);
@@ -136,16 +136,10 @@ function renderLineInput() {
   }
 }
 
-function _calcCanvasDimensions(srcWidth, srcHeight) {
-  const elContainer = document.querySelector('.editor-canvas-container');
-  const maxHeight = MAX_IMAGE_HEIGHT > elContainer.offsetHeight ? elContainer.offsetHeight : MAX_IMAGE_HEIGHT;
-  const maxWidth = elContainer.offsetWidth;
-
-  return calcImgDimensions(srcWidth, srcHeight, maxWidth, maxHeight);
-}
-
 function _firstCanvasRender() {
+  updateElStyleAttr(EDITOR_SELECTOR, 'display', 'flex');
   addNewLine();
   addNewLine();
   renderEditor();
+  updateElStyleAttr(EDITOR_SELECTOR, 'display', 'none');
 }
