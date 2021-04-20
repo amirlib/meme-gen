@@ -57,9 +57,10 @@ function updateSelectedLineStroke(stroke) {
 function updateSelectedLineTop(diff) {
   const img = getImgById(gMeme.selectedImgId);
   const canvasSize = calcCanvasDimensions(img.size.width, img.size.height);
-  const top = gMeme.lines[gMeme.selectedLineId].top + diff;
+  let top = gMeme.lines[gMeme.selectedLineId].top + diff;
 
-  if (top < MIN_TOP_VALUE || top > canvasSize.height - MIN_TOP_VALUE) return;
+  if (top < MIN_TOP_VALUE) top = MIN_TOP_VALUE;
+  if (top > canvasSize.height - MIN_TOP_VALUE) top = canvasSize.height - MIN_TOP_VALUE;
 
   gMeme.lines[gMeme.selectedLineId].top = top;
 }
