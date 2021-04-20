@@ -190,11 +190,11 @@ body.modal-open .main-screen {
 
 /* MEDIA QUERIES */
 
-/* SMALL */
+/* small */
 
 @media (min-width: 576px) {}
 
-/* MEDIUM */
+/* medium */
 
 @media (min-width: 768px) {
   .main-content {
@@ -209,7 +209,7 @@ body.modal-open .main-screen {
   }
 }
 
-/* LARGE */
+/* large */
 
 @media (min-width: 992px) {
   .meme-editor-modal {
@@ -226,10 +226,10 @@ body.modal-open .main-screen {
   }
 }
 
-/* X-LARGE */
+/* x-large */
 
 @media (min-width: 1200px) {}
 
-/* XX-LARGE */
+/* xx-large */
 
 @media (min-width: 1400px) {}
