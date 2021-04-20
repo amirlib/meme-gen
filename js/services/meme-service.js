@@ -21,6 +21,13 @@ function addNewLine() {
   gMeme.selectedLineId = gMeme.lines.length - 1;
 }
 
+function removeCurrentLine() {
+  if (gMeme.selectedLineId === -1) return;
+
+  gMeme.lines.splice(gMeme.selectedLineId, 1);
+  gMeme.selectedLineId = gMeme.lines.length > 0 ? gMeme.lines.length - 1 : -1;
+}
+
 function clearMeme() {
   gMeme = getDefaultMemeObj();
 }
@@ -90,6 +97,8 @@ function getDefaultMemeObj() {
 }
 
 function getSelectedLine() {
+  if (gMeme.lines.length === 0) return null;
+
   return JSON.parse(JSON.stringify(gMeme.lines[gMeme.selectedLineId]));
 }
 

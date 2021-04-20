@@ -96,6 +96,11 @@ function onOpenEditor(imgId) {
   renderModal(id);
 }
 
+function onRemoveLine() {
+  removeCurrentLine();
+  renderEditor();
+}
+
 function renderCanvas() {
   const meme = getCurrentMeme();
   const imgMeme = getImgById(meme.selectedImgId);
@@ -124,9 +129,11 @@ function renderModal() {
 function renderLineInput() {
   const line = getSelectedLine();
 
-  if (!line) return;
-
-  updateElAttr(`${EDITOR_SELECTOR} input[name="lineInput"]`, 'value', line.txt);
+  if (line) {
+    updateElAttr(`${EDITOR_SELECTOR} input[name="lineInput"]`, 'value', line.txt);
+  } else {
+    updateElAttr(`${EDITOR_SELECTOR} input[name="lineInput"]`, 'value', '');
+  }
 }
 
 function _calcCanvasDimensions(srcWidth, srcHeight) {
