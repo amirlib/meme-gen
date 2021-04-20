@@ -38,23 +38,27 @@ function firstCanvasRender() {
 }
 
 function onCanvasMouseDown() {
-  const pos = getEvPos(event)
-  const lines = getCurrentMeme().lines;
+  const { lines, selectedLineId } = getCurrentMeme();
+  const pos = getEvPos(event);
+  const firstLineId = selectedLineId;
+  let currentLine = selectedLineId;
 
   lines.forEach((line, index) => {
-    if (_isLineHit(pos, line)) gSelectedLineIdx = index;
+    if (_isLineHit(pos, line)) {
+      currentLine = index;
+
+      updateSelectedLineId(index);
+    }
   });
 
-  console.log('gSelectedLineIdx', gSelectedLineIdx)
+  if (firstLineId != currentLine) renderEditor();
 }
 
 function _isLineHit(pos, line) {
   const { left, size, top, txt } = line
   const height = size;
-  console.log('height', height)
   const width = Math.floor(gCtx.measureText(txt).width);
-  console.log('width', width)
-  console.log('left', left)
-  return (pos.x >= left && pos.x <= left + width && pos.y >= top - height && pos.y <= top);
 
+  // because text is written middle from the top value so the calculation must contain the correct start point
+  return (pos.x >= left && pos.x <= left + width && pos.y >= top - size / 2 - height && pos.y <= top + size / 2);
 }

@@ -86,6 +86,12 @@ function updateSelectedImgId(id) {
   gMeme.selectedImgId = id;
 }
 
+function updateSelectedLineId(id) {
+  if (id < 0 || id >= gMeme.lines.length) return;
+
+  gMeme.selectedLineId = id;
+}
+
 function incSelectedLineId() {
   if (gMeme.lines.length === 0) return;
 
