@@ -12,9 +12,12 @@ function renderFilterList() {
   const elFilterList = document.querySelector(FILTER_LIST_SELECTOR);
   const keywords = getDisplayKeywords();
   const strHTML = keywords.map(keyword => {
+    const { key, clicks } = keyword;
+    const fontSize = _calcFilterFontSizeByClicks(clicks);
+
     return `  
-      <button type=button" class="btn-filter" onclick="onFilterSearch('${keyword.key}')">
-        ${keyword.key}
+      <button type=button" class="btn-filter" onclick="onFilterSearch('${key}')" style="font-size: ${fontSize}rem;">
+        ${key}
       </button>`;
   });
 
@@ -37,4 +40,18 @@ function renderGallery() {
 function onFilterMeme(filter) {
   changeImgFiler(filter);
   renderGallery();
+}
+
+function _calcFilterFontSizeByClicks(clicks) {
+  const MIN_SIZE = 1;
+  const MAX_SIZE = 3;
+  const MAX_CLICKS = 100;
+  const SIZE_CLICKS = 5;
+  const SIZE_DIFF = 0.1;
+
+  if (clicks > MAX_CLICKS) return MAX_SIZE;
+
+  const level = Math.floor(clicks / SIZE_CLICKS);
+
+  return MIN_SIZE + level * SIZE_DIFF;
 }
