@@ -10,7 +10,8 @@ function onInit() {
 
 function onAddLine() {
   addNewLine();
-  updateElAttr(`${EDITOR_SELECTOR} input[name="lineInput"]`, 'value', '');
+  renderCanvas();
+  renderLineInput();
 }
 
 function onAlignLeft() {
@@ -111,7 +112,6 @@ function firstCanvasRender(imgUrl) {
   onAddLine();
   onAddLine();
   renderCanvas();
-  renderLineInput();
 }
 
 function renderLineInput() {
