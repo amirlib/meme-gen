@@ -78,6 +78,7 @@ function updateLineTop(diff) {
 }
 
 function onCloseEditor() {
+  document.body.classList.remove('modal-open');
   updateElStyleAttr(EDITOR_SELECTOR, 'display', 'none');
 }
 
@@ -89,6 +90,8 @@ function onDownloadMeme(el) {
 }
 
 function onOpenEditor(imgId) {
+  document.body.classList.add('modal-open');
+
   const id = Number.parseInt(imgId);
 
   clearMeme();
