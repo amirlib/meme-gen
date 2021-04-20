@@ -14,7 +14,8 @@
 
     <div class="meme-editor-modal">
       <div class="editor-canvas-container">
-        <canvas height="450" width="450"></canvas>
+        <canvas height="450" width="450" onmousedown="onCanvasMouseDown()" onmousemove="onCanvasMouseMove()"
+          onmouseup="onCanvasMouseUp()" onmouseout="onCanvasMouseOut()"></canvas>
       </div>
 
       <div class="editor-main-container flex column">
@@ -98,6 +99,7 @@
     <script src="./js/services/canvas-service.js"></script>
     <script src="./js/services/image-service.js"></script>
     <script src="./js/services/meme-service.js"></script>
+    <script src="./js/meme-canvas-controller.js"></script>
     <script src="./js/meme-editor-controller.js"></script>
     <script src="./js/meme-gallery-controller.js"></script>
   </body>

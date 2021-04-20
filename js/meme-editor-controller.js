@@ -1,12 +1,8 @@
 const EDITOR_SELECTOR = '.meme-editor-modal';
 const MAX_IMAGE_HEIGHT = 450;
 
-var gCanvas;
-var gCtx;
-
 function initEditor() {
-  gCanvas = document.querySelector('.meme-editor-modal canvas');
-  gCtx = gCanvas.getContext('2d');
+  initCanvas();
 }
 
 function onAddLine() {
@@ -83,7 +79,7 @@ function onCloseEditor() {
 }
 
 function onDownloadMeme(el) {
-  const meme = getCanvasData(gCanvas);
+  const meme = getCanvasData(getCanvas());
 
   el.href = meme;
   el.download = 'my-meme';
@@ -104,28 +100,14 @@ function onRemoveLine() {
   renderEditor();
 }
 
-function renderCanvas() {
-  const meme = getCurrentMeme();
-  const imgMeme = getImgById(meme.selectedImgId);
-  const img = new Image();
-
-  img.src = imgMeme.url;
-  img.onload = () => {
-    const size = calcCanvasDimensions(img.width, img.height);
-
-    resizeCanvas(gCanvas, size);
-    drawImgOnCanvas(img, gCanvas, gCtx);
-    drawMultiTxtOnCanvas(meme.lines, gCanvas, gCtx, meme.selectedLineId);
-  };
-}
-
 function renderEditor() {
   renderCanvas();
   renderLineInput();
 }
 
 function renderModal() {
-  _firstCanvasRender();
+  firstCanvasRender();
+  renderEditor();
   updateElStyleAttr(EDITOR_SELECTOR, 'display', 'flex');
 }
 
@@ -137,12 +119,4 @@ function renderLineInput() {
   } else {
     updateElAttr(`${EDITOR_SELECTOR} input[name="lineInput"]`, 'value', '');
   }
-}
-
-function _firstCanvasRender() {
-  updateElStyleAttr(EDITOR_SELECTOR, 'display', 'flex');
-  addNewLine();
-  addNewLine();
-  renderEditor();
-  updateElStyleAttr(EDITOR_SELECTOR, 'display', 'none');
 }
