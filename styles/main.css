@@ -125,6 +125,7 @@ body.modal-open .main-screen {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 1rem;
   height: 15px;
+  padding: 0;
   width: 15px;
 }
 
@@ -158,10 +159,6 @@ body.modal-open .main-screen {
 
 .editor-content-actions>:first-child {
   flex: 1;
-}
-
-.editor-content-actions>:last-child {
-  margin-inline-end: 16px;
 }
 
 .editor-content-actions select {
