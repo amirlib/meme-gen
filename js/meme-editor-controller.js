@@ -78,7 +78,6 @@ function updateLineTop(diff) {
 
 function onCloseEditor() {
   updateElStyleAttr(EDITOR_SELECTOR, 'display', 'none');
-  clearMeme();
 }
 
 function onDownloadMeme(el) {
@@ -91,6 +90,7 @@ function onDownloadMeme(el) {
 function onOpenEditor(imgId) {
   const id = Number.parseInt(imgId);
 
+  clearMeme();
   updateSelectedImgId(id);
   renderModal(id);
 }
@@ -101,7 +101,6 @@ function renderCanvas() {
   const img = new Image(450, 450);
 
   img.src = imgMeme.url;
-
   img.onload = () => {
     clearCanvas(gCanvas, gCtx);
     drawImgOnCanvas(img, gCanvas, gCtx);

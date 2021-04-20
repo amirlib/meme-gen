@@ -39,7 +39,8 @@
 
 .card img {
   object-fit: cover;
-  height: 100%;
+  object-position: 50% 50%;
+  width: 100%;
 }
 
 /* editor-modal */
@@ -139,17 +140,30 @@
 
 /* MEDIA QUERIES */
 
-/* LARGE */
+/* SMALL */
 
-@media (min-width: 1020px) {
+@media (min-width: 576px) {}
+
+/* MEDIUM */
+
+@media (min-width: 768px) {
   .main-content {
     padding: 30px;
-  }
-  .cards-gallery {
-    gap: 15px;
   }
   .card {
     height: 210px;
     width: 210px;
   }
 }
+
+/* LARGE */
+
+@media (min-width: 992px) {}
+
+/* X-LARGE */
+
+@media (min-width: 1200px) {}
+
+/* XX-LARGE */
+
+@media (min-width: 1400px) {}

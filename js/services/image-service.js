@@ -26,14 +26,18 @@ var gImgs = [
   { id: 25, url: './images/memes/X-Everywhere.jpg', keywords: ['movie', 'toys', 'scary'] },
 ];
 
-function isImgExists(id) {
-  return gImgs.some(img => img.id === id);
-}
-
 function getImgById(id) {
   const img = gImgs.find(img => img.id === id);
 
   if (!img) return;
 
   return JSON.parse(JSON.stringify(img));
+}
+
+function getImgs() {
+  return JSON.parse(JSON.stringify(gImgs));
+}
+
+function isImgExists(id) {
+  return gImgs.some(img => img.id === id);
 }
