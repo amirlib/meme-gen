@@ -172,7 +172,7 @@ var gImgs = [
     id: 24,
     url: './images/memes/putin.jpg',
     size: { height: 400, width: 600 },
-    keywords: [gKeywords.happy, gKeywords.politics, gKeywords.celebrity, gKeywords.happy],
+    keywords: [gKeywords.happy, gKeywords.politics, gKeywords.celebrity, gKeywords.putin],
   },
   {
     id: 25,
@@ -234,5 +234,5 @@ function isImgExists(id) {
 }
 
 function changeImgFiler(filter) {
-  gFilter = filter.trim().split(' ')[0];
+  gFilter = filter.trim().toLowerCase().split(' ')[0];
 }
