@@ -16,9 +16,11 @@ function getCurrentMeme() {
 }
 
 function updateSelectedLineAlign(align) {
-  if (align !== 'left' && align !== 'center' && align !== 'right') return
+  if (align !== 'left' && align !== 'center' && align !== 'right') return;
 
+  // if align value changes, it will override the left value until user changes the left value specifically
   gMeme.lines[gMeme.selectedLineId].align = align;
+  gMeme.lines[gMeme.selectedLineId].left = -1;
 }
 
 function updateSelectedLineFontSize(diff) {
@@ -71,6 +73,7 @@ function addNewLine() {
       align: 'center',
       color: 'white',
       font: 'Impact',
+      left: -1,
       size: 40,
       top: _calcLineTopValue(),
       txt: 'Text here',

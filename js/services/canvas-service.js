@@ -1,3 +1,5 @@
+const PADDING_VALUE = 20;
+
 function clearCanvas(canvas, ctx) {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 }
@@ -23,14 +25,14 @@ function drawLineOnCanvas(startX, startY, endX, endY, ctx, dash = []) {
 }
 
 function drawTextOnCanvas(data, canvas, ctx, highlight = false) {
-  const { align, color, font, size, top, txt } = data;
-  const x = canvas.width / 2;
+  const { align, color, font, left, size, top, txt } = data;
 
   ctx.lineWidth = 2;
   ctx.strokeStyle = highlight ? 'red' : 'black';
   ctx.fillStyle = color;
   ctx.font = `${size}px ${font}`;
-  ctx.textAlign = align;
+
+  const x = left === -1 ? _calcTextLeftValue(align, txt, canvas, ctx) : left;
 
   ctx.fillText(txt, x, top);
   ctx.strokeText(txt, x, top);
@@ -44,4 +46,15 @@ function drawMultiTxtOnCanvas(data, canvas, ctx, highlightTextId = -1) {
       drawTextOnCanvas(element, canvas, ctx);
     }
   });
+}
+
+function _calcTextLeftValue(align, txt, canvas, ctx) {
+  if (align === 'left') return PADDING_VALUE;
+
+  const metrics = ctx.measureText(txt);
+
+  if (align === 'center') return (canvas.width - Math.floor(metrics.width)) / 2;
+
+  // align === 'right'
+  return canvas.width - Math.floor(metrics.width) - PADDING_VALUE;
 }

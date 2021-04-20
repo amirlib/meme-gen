@@ -12,7 +12,7 @@ function onAddLine() {
 }
 
 function onAlignLeft() {
-  updateLineAlign('right');
+  updateLineAlign('left');
 }
 
 function onAlignCenter() {
@@ -20,7 +20,7 @@ function onAlignCenter() {
 }
 
 function onAlignRight() {
-  updateLineAlign('left');
+  updateLineAlign('right');
 }
 
 function onChangeLine() {
