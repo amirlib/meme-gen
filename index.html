@@ -10,6 +10,8 @@
   </head>
 
   <body onload="onInit()">
+    <div class="main-screen" onclick="onHide()"></div>
+
     <div class="meme-editor-modal">
       <div class="editor-canvas-container">
         <canvas height="450" width="450"></canvas>
@@ -80,8 +82,12 @@
     </header>
 
     <main class="main-content flex column">
-      <section class="search-section">
-        <input type="text" name="searchMeme" placeholder="Search" onkeyup="onFilterMeme(value)">
+      <section class="filter-section">
+        <input type="text" name="filterMeme" placeholder="Search" onkeyup="onFilterMeme(value)">
+
+        <div class="filter-list-container">
+
+        </div>
       </section>
 
       <section class="cards-gallery flex wrap justify-center"></section>
