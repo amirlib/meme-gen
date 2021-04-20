@@ -1,3 +1,5 @@
+const EDITOR_SELECTOR = '.meme-editor-modal';
+
 var gCanvas;
 var gCtx;
 
@@ -84,6 +86,10 @@ function renderCanvas() {
   drawMultiTxtOnCanvas(meme.lines, gCanvas, gCtx, meme.selectedLineId);
 }
 
+function onCloseEditor() {
+  updateElStyleAttr(EDITOR_SELECTOR, 'display', 'none');
+}
+
 function onOpenEditor(imgId) {
   const id = Number.parseInt(imgId);
 
@@ -97,7 +103,7 @@ function renderModal(imgId) {
   if (!img) return;
 
   firstCanvasRender(img.url);
-  updateElStyleAttr('.meme-editor-modal', 'display', 'flex');
+  updateElStyleAttr(EDITOR_SELECTOR, 'display', 'flex');
 }
 
 function firstCanvasRender(imgUrl) {
@@ -112,5 +118,5 @@ function renderLineInput() {
 
   if (!line) return;
 
-  updateElAttr('.meme-editor-modal input[name="lineInput"]', 'value', line.txt);
+  updateElAttr(`${EDITOR_SELECTOR} input[name="lineInput"]`, 'value', line.txt);
 }
