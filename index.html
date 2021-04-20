@@ -25,7 +25,7 @@
             <button type="button" onclick="onChangeLine()">⥮</button>
             <button type="button" onclick="onAddLine()">+</button>
             <button type="button">
-              <img src="./images/trash.svg" alt="remove line">
+              <img src="./images/icons/trash.svg" alt="remove line">
             </button>
           </div>
         </div>
@@ -38,6 +38,15 @@
 
             <button type="button" class="btn-dec-font-size" onclick="onDecFontSize()">A</button>
             <button type="button" class="btn-inc-font-size" onclick="onIncFontSize()">A</button>
+            <button type="button" onclick="onAlignLeft()">
+              <img src="./images/icons/align-left.svg" alt="align text left">
+            </button>
+            <button type="button" onclick="onAlignCenter()">
+              <img src="./images/icons/align-center.svg" alt="align text center">
+            </button>
+            <button type="button" onclick="onAlignRight()">
+              <img src="./images/icons/align-right.svg" alt="align text right">
+            </button>
           </div>
 
           <input type="text" name="lineInput" onchange="onChangeLineInput(value)">

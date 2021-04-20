@@ -15,6 +15,12 @@ function getCurrentMeme() {
   return JSON.parse(JSON.stringify(gMeme));
 }
 
+function updateSelectedLineAlign(align) {
+  if (align !== 'left' && align !== 'center' && align !== 'right') return
+
+  gMeme.lines[gMeme.selectedLineId].align = align;
+}
+
 function updateSelectedLineFontSize(diff) {
   const size = gMeme.lines[gMeme.selectedLineId].size + diff;
 

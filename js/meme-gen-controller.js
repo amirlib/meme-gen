@@ -11,6 +11,18 @@ function onAddLine() {
   updateElAttr('.meme-editor-modal input[name="lineInput"]', 'value', '');
 }
 
+function onAlignLeft() {
+  updateLineAlign('right');
+}
+
+function onAlignCenter() {
+  updateLineAlign('center');
+}
+
+function onAlignRight() {
+  updateLineAlign('left');
+}
+
 function onChangeLine() {
   incSelectedLineId();
   renderLineInput();
@@ -36,6 +48,11 @@ function onLineDown() {
 
 function onLineUp() {
   updateLineTop(-10);
+}
+
+function updateLineAlign(align) {
+  updateSelectedLineAlign(align);
+  renderCanvas();
 }
 
 function updateLineFontSize(diff) {
