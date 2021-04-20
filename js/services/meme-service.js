@@ -32,6 +32,7 @@ function clearMeme() {
 
 function updateSelectedLineAlign(align) {
   if (align !== 'left' && align !== 'center' && align !== 'right') return;
+  if (gMeme.lines.length === 0) return;
 
   const { font, size, txt } = gMeme.lines[gMeme.selectedLineId];
 
@@ -39,10 +40,14 @@ function updateSelectedLineAlign(align) {
 }
 
 function updateSelectedLineFontColor(color) {
+  if (gMeme.lines.length === 0) return;
+
   gMeme.lines[gMeme.selectedLineId].color = color;
 }
 
 function updateSelectedLineFontSize(diff) {
+  if (gMeme.lines.length === 0) return;
+
   const size = gMeme.lines[gMeme.selectedLineId].size + diff;
 
   if (size < 10) return;
@@ -51,10 +56,14 @@ function updateSelectedLineFontSize(diff) {
 }
 
 function updateSelectedLineStroke(stroke) {
+  if (gMeme.lines.length === 0) return;
+
   gMeme.lines[gMeme.selectedLineId].stroke = stroke;
 }
 
 function updateSelectedLineTop(diff) {
+  if (gMeme.lines.length === 0) return;
+
   const img = getImgById(gMeme.selectedImgId);
   const canvasSize = calcCanvasDimensions(img.size.width, img.size.height);
   let top = gMeme.lines[gMeme.selectedLineId].top + diff;
@@ -66,6 +75,8 @@ function updateSelectedLineTop(diff) {
 }
 
 function updateSelectedLineTxt(txt) {
+  if (gMeme.lines.length === 0) return;
+
   gMeme.lines[gMeme.selectedLineId].txt = txt;
 }
 
