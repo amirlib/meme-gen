@@ -23,6 +23,11 @@ function onAlignRight() {
   updateLineAlign('right');
 }
 
+function onChangeFontColor(color) {
+  updateSelectedLineFontColor(color);
+  renderCanvas();
+}
+
 function onChangeLine() {
   incSelectedLineId();
   renderLineInput();
@@ -31,6 +36,11 @@ function onChangeLine() {
 
 function onChangeLineInput(txt) {
   updateSelectedLineTxt(txt);
+  renderCanvas();
+}
+
+function onChangeStrokeColor(color) {
+  updateSelectedLineStroke(color);
   renderCanvas();
 }
 

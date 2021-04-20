@@ -47,6 +47,14 @@
             <button type="button" onclick="onAlignRight()">
               <img src="./images/icons/align-right.svg" alt="align text right">
             </button>
+            <label>
+              <img src="./images/icons/font-color.svg" alt="change font color">
+              <input type="color" class="hide" onchange="onChangeFontColor(value)">
+            </label>
+            <label>
+              <img src="./images/icons/stroke-color.svg" alt="change stroke color">
+              <input type="color" class="hide" onchange="onChangeStrokeColor(value)">
+            </label>
           </div>
 
           <input type="text" name="lineInput" onchange="onChangeLineInput(value)">

@@ -101,11 +101,16 @@
 }
 
 .editor-content-actions>:not(:first-child) {
-  margin-inline-start: 22px;
+  margin-inline-start: 16px;
+}
+
+.editor-content-actions>:last-child {
+  margin-inline-end: 16px;
 }
 
 .editor-content-actions select {
   color: #989898;
+  flex: 1;
   font-size: .75rem;
 }
 

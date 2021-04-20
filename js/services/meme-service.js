@@ -23,12 +23,21 @@ function updateSelectedLineAlign(align) {
   gMeme.lines[gMeme.selectedLineId].left = -1;
 }
 
+function updateSelectedLineFontColor(color) {
+  gMeme.lines[gMeme.selectedLineId].color = color;
+}
+
+
 function updateSelectedLineFontSize(diff) {
   const size = gMeme.lines[gMeme.selectedLineId].size + diff;
 
   if (size < 10) return;
 
   gMeme.lines[gMeme.selectedLineId].size = size;
+}
+
+function updateSelectedLineStroke(stroke) {
+  gMeme.lines[gMeme.selectedLineId].stroke = stroke;
 }
 
 function updateSelectedLineTop(diff) {
@@ -75,6 +84,7 @@ function addNewLine() {
       font: 'Impact',
       left: -1,
       size: 40,
+      stroke: 'black',
       top: _calcLineTopValue(),
       txt: 'Text here',
     }

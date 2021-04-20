@@ -1,3 +1,4 @@
+const HIGHLIGHT_COLOR = 'red';
 const PADDING_VALUE = 20;
 
 function clearCanvas(canvas, ctx) {
@@ -25,10 +26,10 @@ function drawLineOnCanvas(startX, startY, endX, endY, ctx, dash = []) {
 }
 
 function drawTextOnCanvas(data, canvas, ctx, highlight = false) {
-  const { align, color, font, left, size, top, txt } = data;
+  const { align, color, font, left, size, stroke, top, txt } = data;
 
   ctx.lineWidth = 2;
-  ctx.strokeStyle = highlight ? 'red' : 'black';
+  ctx.strokeStyle = highlight ? HIGHLIGHT_COLOR : stroke;
   ctx.fillStyle = color;
   ctx.font = `${size}px ${font}`;
 
