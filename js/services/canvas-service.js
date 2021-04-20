@@ -1,6 +1,7 @@
 const CANVAS_CONTAINER_SELECTOR = '.editor-canvas-container';
 const HIGHLIGHT_COLOR = 'red';
-const PADDING_VALUE = 20;
+const LINE_WIDTH = 2;
+const TEXT_BASE_LINE = 'middle';
 
 function clearCanvas(canvas, ctx) {
   ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -31,18 +32,16 @@ function drawLineOnCanvas(startX, startY, endX, endY, ctx, dash = []) {
 }
 
 function drawTextOnCanvas(data, canvas, ctx, highlight = false) {
-  const { align, color, font, left, size, stroke, top, txt } = data;
+  const { color, font, left, size, stroke, top, txt } = data;
 
-  ctx.lineWidth = 2;
+  ctx.lineWidth = LINE_WIDTH;
   ctx.strokeStyle = highlight ? HIGHLIGHT_COLOR : stroke;
   ctx.fillStyle = color;
   ctx.font = `${size}px ${font}`;
-  ctx.textBaseline = 'middle';
+  ctx.textBaseline = TEXT_BASE_LINE;
 
-  const x = left === -1 ? _calcTextLeftValue(align, txt, canvas, ctx) : left;
-
-  ctx.fillText(txt, x, top);
-  ctx.strokeText(txt, x, top);
+  ctx.fillText(txt, left, top);
+  ctx.strokeText(txt, left, top);
 }
 
 function drawMultiTxtOnCanvas(data, canvas, ctx, highlightTextId = -1) {
@@ -64,15 +63,4 @@ function resizeCanvas(canvas, size) {
 
   canvas.height = height;
   canvas.width = width;
-}
-
-function _calcTextLeftValue(align, txt, canvas, ctx) {
-  if (align === 'left') return PADDING_VALUE;
-
-  const metrics = ctx.measureText(txt);
-
-  if (align === 'center') return (canvas.width - Math.floor(metrics.width)) / 2;
-
-  // align === 'right'
-  return canvas.width - Math.floor(metrics.width) - PADDING_VALUE;
 }

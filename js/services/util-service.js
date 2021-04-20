@@ -1,3 +1,5 @@
+const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
+
 function calcImgRatio(srcWidth, srcHeight, maxWidth, maxHeight) {
   return Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
 }
@@ -29,4 +31,21 @@ function getRandomInt(min, max) {
   max = Math.floor(max);
 
   return Math.floor(Math.random() * (max - min) + min);
+}
+
+function getEvPos(ev) {
+  const pos = {
+    x: ev.offsetX,
+    y: ev.offsetY
+  };
+
+  if (gTouchEvs.includes(ev.type)) {
+    ev.preventDefault();
+
+    ev = ev.changedTouches[0];
+    pos.x = ev.pageX - ev.target.offsetLeft - ev.target.clientLeft;
+    pos.y = ev.pageY - ev.target.offsetTop - ev.target.clientTop;
+  };
+
+  return pos;
 }

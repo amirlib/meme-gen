@@ -1,3 +1,4 @@
+const MIN_LEFT_VALUE = 20;
 const MIN_TOP_VALUE = 30;
 
 var gMeme = getDefaultMemeObj();
@@ -5,10 +6,9 @@ var gMeme = getDefaultMemeObj();
 function addNewLine() {
   gMeme.lines.push(
     {
-      align: 'center',
       color: 'white',
       font: 'Impact',
-      left: -1,
+      left: _calcLineLeftValue('Text here', 'center', 40, 'Impact'),
       size: 40,
       stroke: 'black',
       top: _calcLineTopValue(),
@@ -33,9 +33,9 @@ function clearMeme() {
 function updateSelectedLineAlign(align) {
   if (align !== 'left' && align !== 'center' && align !== 'right') return;
 
-  // if align value changes, it will override the left value until user changes the left value specifically
-  gMeme.lines[gMeme.selectedLineId].align = align;
-  gMeme.lines[gMeme.selectedLineId].left = -1;
+  const { font, size, txt } = gMeme.lines[gMeme.selectedLineId];
+
+  gMeme.lines[gMeme.selectedLineId].left = _calcLineLeftValue(txt, align, size, font);
 }
 
 function updateSelectedLineFontColor(color) {
@@ -101,6 +101,30 @@ function getSelectedLine() {
   if (gMeme.lines.length === 0) return null;
 
   return JSON.parse(JSON.stringify(gMeme.lines[gMeme.selectedLineId]));
+}
+
+function _calcLineLeftValue(txt, align, size, font) {
+  if (align === 'left') return MIN_LEFT_VALUE;
+
+  const ctx = getCanvasCtx();
+
+  ctx.save();
+
+  ctx.lineWidth = 2;
+  ctx.font = `${size}px ${font}`;
+  ctx.textBaseline = 'middle';
+
+  const lineMetrics = ctx.measureText(txt);
+
+  ctx.restore();
+
+  const img = getImgById(gMeme.selectedImgId);
+  const canvasSize = calcCanvasDimensions(img.size.width, img.size.height);
+
+  if (align === 'center') return (canvasSize.width - Math.floor(lineMetrics.width)) / 2;
+
+  // align === 'right'
+  return canvasSize.width - Math.floor(lineMetrics.width) - MIN_LEFT_VALUE;
 }
 
 function _calcLineTopValue() {
