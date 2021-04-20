@@ -5,14 +5,27 @@ const MIN_TOP_VALUE = 50;
 var gImgs = [
   { id: 1, url: './images/memes-bg/1.jpg', keywords: ['funny', 'politics', 'celebrity'] },
 ];
-var gMeme = {
-  lines: [],
-  selectedImgId: 0,
-  selectedLineId: -1,
+var gMeme = getDefaultMemeObj();
+
+function addNewLine() {
+  gMeme.lines.push(
+    {
+      align: 'center',
+      color: 'white',
+      font: 'Impact',
+      left: -1,
+      size: 40,
+      stroke: 'black',
+      top: _calcLineTopValue(),
+      txt: 'Text here',
+    }
+  );
+
+  gMeme.selectedLineId = gMeme.lines.length - 1;
 }
 
-function getCurrentMeme() {
-  return JSON.parse(JSON.stringify(gMeme));
+function clearMeme() {
+  gMeme = getDefaultMemeObj();
 }
 
 function updateSelectedLineAlign(align) {
@@ -26,7 +39,6 @@ function updateSelectedLineAlign(align) {
 function updateSelectedLineFontColor(color) {
   gMeme.lines[gMeme.selectedLineId].color = color;
 }
-
 
 function updateSelectedLineFontSize(diff) {
   const size = gMeme.lines[gMeme.selectedLineId].size + diff;
@@ -68,29 +80,24 @@ function incSelectedLineId() {
   }
 }
 
+function getCurrentMeme() {
+  return JSON.parse(JSON.stringify(gMeme));
+}
+
+function getDefaultMemeObj() {
+  return {
+    lines: [],
+    selectedImgId: 0,
+    selectedLineId: -1,
+  }
+}
+
 function getImgById(id) {
   const img = gImgs.find(img => img.id === id);
 
   if (!img) return;
 
   return JSON.parse(JSON.stringify(img));
-}
-
-function addNewLine() {
-  gMeme.lines.push(
-    {
-      align: 'center',
-      color: 'white',
-      font: 'Impact',
-      left: -1,
-      size: 40,
-      stroke: 'black',
-      top: _calcLineTopValue(),
-      txt: 'Text here',
-    }
-  );
-
-  gMeme.selectedLineId = gMeme.lines.length - 1;
 }
 
 function getSelectedLine() {

@@ -10,7 +10,7 @@ function onInit() {
 
 function onAddLine() {
   addNewLine();
-  updateElAttr('.meme-editor-modal input[name="lineInput"]', 'value', '');
+  updateElAttr(`${EDITOR_SELECTOR} input[name="lineInput"]`, 'value', '');
 }
 
 function onAlignLeft() {
@@ -88,6 +88,7 @@ function renderCanvas() {
 
 function onCloseEditor() {
   updateElStyleAttr(EDITOR_SELECTOR, 'display', 'none');
+  clearMeme();
 }
 
 function onOpenEditor(imgId) {
