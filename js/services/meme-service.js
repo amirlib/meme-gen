@@ -33,6 +33,15 @@ function clearMeme() {
   gMeme = getDefaultMemeObj();
 }
 
+function updateCurrentMemeById(id) {
+  const memes = loadFromStorage(MEMES_DB_KEY);
+  const meme = memes.find(meme => meme.id === id);
+
+  if (meme) gMeme = meme;
+
+  return meme;
+}
+
 function updateSelectedLineAlign(align) {
   if (align !== 'left' && align !== 'center' && align !== 'right') return;
   if (gMeme.lines.length === 0) return;
@@ -133,7 +142,14 @@ function saveMeme(meme, dataUrl) {
 
   meme = JSON.parse(JSON.stringify(meme));
   meme.dataUrl = dataUrl;
-  memes.push(meme);
+
+  const memeIdx = memes.findIndex(obj => obj.id === meme.id);
+
+  if (memeIdx !== -1) {
+    memes[memeIdx] = meme;
+  } else {
+    memes.push(meme);
+  }
 
   saveToStorage(MEMES_DB_KEY, memes);
 }

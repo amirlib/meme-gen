@@ -28,12 +28,35 @@ function renderImgs() {
   const imgs = getImgs();
   const strHTML = imgs.map(img => {
     return `  
-      <div class="card" onclick="onOpenEditor('${img.id}')">
+      <div class="card" onclick="onOpenEditorWithImg('${img.id}')">
         <img src="${img.url}" alt="meme-${img.id}">
       </div>`;
   });
 
   renderToGallery(strHTML);
+}
+
+function onOpenEditorWithImg(imgId) {
+  document.body.classList.add('modal-open');
+
+  const id = Number.parseInt(imgId);
+
+  clearMeme();
+  updateSelectedImgId(id);
+  _initEditorWithImg();
+  renderEditor();
+  openEditor();
+}
+
+function onOpenEditorWithMeme(memeId) {
+  document.body.classList.add('modal-open');
+
+  const meme = updateCurrentMemeById(memeId);
+
+  if (!meme) return;
+  
+  renderEditor();
+  openEditor();
 }
 
 function renderMemes() {
@@ -43,7 +66,7 @@ function renderMemes() {
 
   const strHTML = memes.map(meme => {
     return `  
-      <div class="card" onclick="onOpenEditor('${meme.id}')">
+      <div class="card" onclick="onOpenEditorWithMeme('${meme.id}')">
         <img src="${meme.dataUrl}" alt="meme-${meme.id}">
       </div>`;
   });
@@ -57,6 +80,11 @@ function renderToGallery(html) {
 
 function renderSearchBar(filter) {
   updateElAttr('input[name="filterMeme"]', 'value', filter);
+}
+
+function onCloseEditor() {
+  document.body.classList.remove('modal-open');
+  closeEditor();
 }
 
 function onImgFilter(filter) {
@@ -78,6 +106,14 @@ function onOpenSavedMemes() {
   renderMemes(memes);
 }
 
+function closeEditor() {
+  updateElStyleAttr(EDITOR_SELECTOR, 'display', 'none');
+}
+
+function openEditor() {
+  updateElStyleAttr(EDITOR_SELECTOR, 'display', 'flex');
+}
+
 function _calcFilterFontSizeByClicks(clicks) {
   const MIN_SIZE = 1;
   const MAX_SIZE = 3;
@@ -90,4 +126,11 @@ function _calcFilterFontSizeByClicks(clicks) {
   const level = Math.floor(clicks / SIZE_CLICKS);
 
   return MIN_SIZE + level * SIZE_DIFF;
+}
+
+function _initEditorWithImg() {
+  openEditor();
+  addNewLine();
+  addNewLine();
+  closeEditor();
 }

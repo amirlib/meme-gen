@@ -73,11 +73,6 @@ function updateLineTop(diff) {
   renderCanvas(getCurrentMeme(), getCanvasCtx());
 }
 
-function onCloseEditor() {
-  document.body.classList.remove('modal-open');
-  updateElStyleAttr(EDITOR_SELECTOR, 'display', 'none');
-}
-
 function onDownloadMeme(el) {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
@@ -91,16 +86,6 @@ function onDownloadMeme(el) {
   };
 
   renderCanvas(getCurrentMeme(), ctx, false, download);
-}
-
-function onOpenEditor(imgId) {
-  document.body.classList.add('modal-open');
-
-  const id = Number.parseInt(imgId);
-
-  clearMeme();
-  updateSelectedImgId(id);
-  renderModal(id);
 }
 
 function onRemoveLine() {
@@ -124,12 +109,6 @@ function onSaveMeme() {
 function renderEditor() {
   renderCanvas(getCurrentMeme(), getCanvasCtx());
   renderLineInput();
-}
-
-function renderModal() {
-  firstCanvasRender();
-  renderEditor();
-  updateElStyleAttr(EDITOR_SELECTOR, 'display', 'flex');
 }
 
 function renderLineInput() {

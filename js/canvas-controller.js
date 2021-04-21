@@ -32,13 +32,6 @@ function renderCanvas(meme, ctx, isHighlight = true, callback) {
   };
 }
 
-function firstCanvasRender() {
-  updateElStyleAttr(EDITOR_SELECTOR, 'display', 'flex'); //TODO: create function for this logic in editor controller
-  addNewLine();
-  addNewLine();
-  updateElStyleAttr(EDITOR_SELECTOR, 'display', 'none'); //TODO: create function for this logic in editor controller
-}
-
 function onCanvasMouseDown() {
   const { lines, selectedLineId } = getCurrentMeme();
   const pos = getEvPos(event);
