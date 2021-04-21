@@ -2,6 +2,9 @@ const FILTER_LIST_SELECTOR = '.filter-list-container';
 const GALLERY_SELECTOR = '.cards-gallery';
 const REMOVE_BUT_SELECTOR = '.btn-remove-meme';
 
+var gIsEditorOpen = false;
+var gViewMode = 'gallery';
+
 function onInit() {
   initKeywords();
   initEditor();
@@ -40,6 +43,8 @@ function renderImgs() {
 function onOpenEditorWithImg(imgId) {
   document.body.classList.add('modal-open');
 
+  gIsEditorOpen = true;
+
   const id = Number.parseInt(imgId);
 
   clearMeme();
@@ -51,6 +56,8 @@ function onOpenEditorWithImg(imgId) {
 
 function onOpenEditorWithMeme(memeId) {
   document.body.classList.add('modal-open');
+
+  gIsEditorOpen = true;
 
   const meme = updateCurrentMemeById(memeId);
 
@@ -89,6 +96,10 @@ function onCloseEditor() {
   document.body.classList.remove('modal-open');
   hideDeleteMemeBut();
   closeEditor();
+
+  gIsEditorOpen = false;
+
+  if (gViewMode === 'memes') onOpenSavedMemes();
 }
 
 function onImgFilter(filter) {
@@ -107,7 +118,14 @@ function onFilterSearch(filter) {
 function onOpenSavedMemes() {
   const memes = getSavedMemes();
 
-  onCloseEditor();
+  gViewMode = 'memes';
+
+  if (gIsEditorOpen) {
+    onCloseEditor();
+
+    gIsEditorOpen = false;
+  }
+
   renderMemes(memes);
 }
 
