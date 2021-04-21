@@ -15,17 +15,20 @@ function getCanvasCtx() {
   return gCtx;
 }
 
-function renderCanvas(meme = getCurrentMeme()) {
+function renderCanvas(meme, ctx, isHighlight = true, callback) {
   const imgMeme = getImgById(meme.selectedImgId);
   const img = new Image();
 
   img.src = imgMeme.url;
   img.onload = () => {
     const size = calcCanvasDimensions(img.width, img.height);
+    const highlightId = isHighlight ? meme.selectedLineId : -1;
 
-    resizeCanvas(gCanvas, size);
-    drawImgOnCanvas(img, gCanvas, gCtx);
-    drawMultiTxtOnCanvas(meme.lines, gCanvas, gCtx, meme.selectedLineId);
+    resizeCanvas(ctx.canvas, size);
+    drawImgOnCanvas(img, ctx);
+    drawMultiTxtOnCanvas(meme.lines, ctx, highlightId);
+
+    if (callback) callback(ctx.canvas);
   };
 }
 

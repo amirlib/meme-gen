@@ -3,8 +3,8 @@ const HIGHLIGHT_COLOR = 'red';
 const LINE_WIDTH = 2;
 const TEXT_BASE_LINE = 'middle';
 
-function clearCanvas(canvas, ctx) {
-  ctx.clearRect(0, 0, canvas.width, canvas.height)
+function clearCanvas(ctx) {
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
 }
 
 function calcCanvasDimensions(srcWidth, srcHeight) {
@@ -15,8 +15,8 @@ function calcCanvasDimensions(srcWidth, srcHeight) {
   return calcImgDimensions(srcWidth, srcHeight, maxWidth, maxHeight);
 }
 
-function drawImgOnCanvas(img, canvas, ctx) {
-  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+function drawImgOnCanvas(img, ctx) {
+  ctx.drawImage(img, 0, 0, ctx.canvas.width, ctx.canvas.height);
 }
 
 function drawLineOnCanvas(startX, startY, endX, endY, ctx, dash = []) {
@@ -31,7 +31,7 @@ function drawLineOnCanvas(startX, startY, endX, endY, ctx, dash = []) {
   ctx.stroke();
 }
 
-function drawTextOnCanvas(data, canvas, ctx, highlight = false) {
+function drawTextOnCanvas(data, ctx, highlight = false) {
   const { color, font, left, size, stroke, top, txt } = data;
 
   ctx.lineWidth = LINE_WIDTH;
@@ -44,12 +44,12 @@ function drawTextOnCanvas(data, canvas, ctx, highlight = false) {
   ctx.strokeText(txt, left, top);
 }
 
-function drawMultiTxtOnCanvas(data, canvas, ctx, highlightTextId = -1) {
+function drawMultiTxtOnCanvas(data, ctx, highlightTextId = -1) {
   data.forEach((element, index) => {
     if (index === highlightTextId) {
-      drawTextOnCanvas(element, canvas, ctx, true);
+      drawTextOnCanvas(element, ctx, true);
     } else {
-      drawTextOnCanvas(element, canvas, ctx);
+      drawTextOnCanvas(element, ctx);
     }
   });
 }

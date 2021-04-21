@@ -34,12 +34,12 @@ function onChangeLine() {
 
 function onChangeLineInput(txt) {
   updateSelectedLineTxt(txt);
-  renderCanvas();
+  renderCanvas(getCurrentMeme(), getCanvasCtx());
 }
 
 function onChangeStrokeColor(color) {
   updateSelectedLineStroke(color);
-  renderCanvas();
+  renderCanvas(getCurrentMeme(), getCanvasCtx());
 }
 
 function onDecFontSize() {
@@ -60,17 +60,17 @@ function onLineUp() {
 
 function updateLineAlign(align) {
   updateSelectedLineAlign(align);
-  renderCanvas();
+  renderCanvas(getCurrentMeme(), getCanvasCtx());
 }
 
 function updateLineFontSize(diff) {
   updateSelectedLineFontSize(diff);
-  renderCanvas();
+  renderCanvas(getCurrentMeme(), getCanvasCtx());
 }
 
 function updateLineTop(diff) {
   updateSelectedLineTop(diff);
-  renderCanvas();
+  renderCanvas(getCurrentMeme(), getCanvasCtx());
 }
 
 function onCloseEditor() {
@@ -79,10 +79,18 @@ function onCloseEditor() {
 }
 
 function onDownloadMeme(el) {
-  const meme = getCanvasData(getCanvas());
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  const download = (canvas) => {
+    const meme = getCanvasData(canvas);
+    const element = document.createElement('a');
 
-  el.href = meme;
-  el.download = 'my-meme';
+    element.setAttribute('href', meme);
+    element.setAttribute('download', 'my-meme.png');
+    element.click();
+  };
+
+  renderCanvas(getCurrentMeme(), ctx, false, download);
 }
 
 function onOpenEditor(imgId) {
@@ -107,7 +115,7 @@ function onSaveMeme() {
 }
 
 function renderEditor() {
-  renderCanvas();
+  renderCanvas(getCurrentMeme(), getCanvasCtx());
   renderLineInput();
 }
 
