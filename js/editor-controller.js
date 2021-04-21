@@ -81,11 +81,11 @@ function onCloseEditor() {
 function onDownloadMeme(el) {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
-  const download = (canvas) => {
-    const meme = getCanvasData(canvas);
+  const download = canvas => {
+    const dataUrl = getCanvasData(canvas);
     const element = document.createElement('a');
 
-    element.setAttribute('href', meme);
+    element.setAttribute('href', dataUrl);
     element.setAttribute('download', 'my-meme.png');
     element.click();
   };
@@ -109,9 +109,16 @@ function onRemoveLine() {
 }
 
 function onSaveMeme() {
-  const dataUrl = getCanvasData(getCanvas());
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  const save = canvas => {
+    const dataUrl = getCanvasData(canvas);
+    const meme = getCurrentMeme();
 
-  saveMeme(getCurrentMeme(), dataUrl);
+    saveMeme(meme, dataUrl);
+  };
+
+  renderCanvas(getCurrentMeme(), ctx, false, save);
 }
 
 function renderEditor() {
