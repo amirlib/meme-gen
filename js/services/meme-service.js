@@ -111,6 +111,7 @@ function getCurrentMeme() {
 
 function getDefaultMemeObj() {
   return {
+    id: makeId(),
     lines: [],
     selectedImgId: 0,
     selectedLineId: -1,
