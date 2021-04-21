@@ -49,6 +49,12 @@ function onCanvasMouseDown() {
   if (gDragAndDrop.lineId !== -1) renderEditor();
 }
 
+function onCanvasTouchStart() {
+  event.preventDefault();
+
+  onCanvasMouseDown();
+}
+
 function onCanvasMouseMove() {
   if (gDragAndDrop.lineId === -1) return;
 
@@ -63,9 +69,21 @@ function onCanvasMouseMove() {
   renderCanvas(getCurrentMeme(), getCanvasCtx());
 }
 
+function onCanvasTouchMove() {
+  event.preventDefault();
+
+  onCanvasMouseMove();
+}
+
 function onCanvasMouseUp() {
   gDragAndDrop = _resetDragAndDropObj();
 
+}
+
+function onCanvasTouchEnd() {
+  event.preventDefault();
+
+  onCanvasMouseUp();
 }
 
 function onCanvasMouseOut() {

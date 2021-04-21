@@ -58,9 +58,11 @@ function getEvPos(ev) {
   if (gTouchEvs.includes(ev.type)) {
     ev.preventDefault();
 
+    const measures = ev.target.getBoundingClientRect();
+
     ev = ev.changedTouches[0];
     pos.x = ev.pageX - ev.target.offsetLeft - ev.target.clientLeft;
-    pos.y = ev.pageY - ev.target.offsetTop - ev.target.clientTop;
+    pos.y = ev.clientY - measures.top;
   };
 
   return pos;
