@@ -3,6 +3,8 @@ const HIGHLIGHT_COLOR = 'red';
 const LINE_WIDTH = 2;
 const TEXT_BASE_LINE = 'middle';
 
+var gCtx;
+
 function clearCanvas(ctx) {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
 }
@@ -54,8 +56,27 @@ function drawMultiTxtOnCanvas(data, ctx, highlightTextId = -1) {
   });
 }
 
+function getCanvasCtx() {
+  return gCtx;
+}
+
+function setCanvasCtx(ctx) {
+  return gCtx = ctx;
+}
+
 function getCanvasData(canvas) {
   return canvas.toDataURL();
+}
+
+function measureTxt(font, size, txt) {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  ctx.lineWidth = LINE_WIDTH;
+  ctx.font = `${size}px ${font}`;
+  ctx.textBaseline = TEXT_BASE_LINE;
+
+  return ctx.measureText(txt);
 }
 
 function resizeCanvas(canvas, size) {

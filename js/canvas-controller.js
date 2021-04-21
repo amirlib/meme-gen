@@ -1,18 +1,10 @@
 var gCanvas;
-var gCtx;
 var gDragAndDrop = _resetDragAndDropObj();
 
 function initCanvas() {
   gCanvas = document.querySelector('.meme-editor-modal canvas');
-  gCtx = gCanvas.getContext('2d');
-}
 
-function getCanvas() {
-  return gCanvas;
-}
-
-function getCanvasCtx() {
-  return gCtx;
+  setCanvasCtx(gCanvas.getContext('2d'));
 }
 
 function renderCanvas(meme, ctx, isHighlight = true, callback) {
@@ -66,7 +58,7 @@ function onCanvasMouseMove() {
   gDragAndDrop.lastY = pos.y;
 
   updateSelectedLinePos(dx, dy);
-  renderCanvas(getCurrentMeme(), getCanvasCtx());
+  renderCanvas(getCurrentMeme(), gCtx);
 }
 
 function onCanvasTouchMove() {
@@ -100,14 +92,8 @@ function _resetDragAndDropObj() {
 
 function _isLineHit(pos, line) {
   const { font, left, size, top, txt } = line;
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-
-  ctx.lineWidth = 2;
-  ctx.font = `${size}px ${font}`;
-  ctx.textBaseline = 'middle';
-
-  const width = Math.floor(ctx.measureText(txt).width);
+  const measures = measureTxt(font, size, txt);
+  const width = Math.floor(measures.width);
 
   // because text is written middle from the top value so the calculation must contain the correct start point
   return (pos.x >= left && pos.x <= left + width && pos.y >= top - size / 2 && pos.y <= top + size / 2);

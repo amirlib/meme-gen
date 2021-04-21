@@ -185,25 +185,14 @@ function saveMeme(meme, dataUrl) {
 function _calcLineLeftValue(txt, align, size, font) {
   if (align === 'left') return MIN_LEFT_VALUE;
 
-  const ctx = getCanvasCtx();
-
-  ctx.save();
-
-  ctx.lineWidth = 2;
-  ctx.font = `${size}px ${font}`;
-  ctx.textBaseline = 'middle';
-
-  const lineMetrics = ctx.measureText(txt);
-
-  ctx.restore();
-
+  const lineMeasures = measureTxt(font, size, txt);
   const img = getImgById(gMeme.selectedImgId);
   const canvasSize = calcCanvasDimensions(img.size.width, img.size.height);
 
-  if (align === 'center') return (canvasSize.width - Math.floor(lineMetrics.width)) / 2;
+  if (align === 'center') return (canvasSize.width - Math.floor(lineMeasures.width)) / 2;
 
   // align === 'right'
-  return canvasSize.width - Math.floor(lineMetrics.width) - MIN_LEFT_VALUE;
+  return canvasSize.width - Math.floor(lineMeasures.width) - MIN_LEFT_VALUE;
 }
 
 function _calcLineTopValue() {
