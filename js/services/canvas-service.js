@@ -5,10 +5,6 @@ const TEXT_BASE_LINE = 'middle';
 
 var gCtx;
 
-function clearCanvas(ctx) {
-  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
-}
-
 function calcCanvasDimensions(srcWidth, srcHeight) {
   const elContainer = document.querySelector(CANVAS_CONTAINER_SELECTOR);
   const maxHeight = MAX_IMAGE_HEIGHT > elContainer.offsetHeight ? elContainer.offsetHeight : MAX_IMAGE_HEIGHT;
@@ -21,26 +17,16 @@ function drawImgOnCanvas(img, ctx) {
   ctx.drawImage(img, 0, 0, ctx.canvas.width, ctx.canvas.height);
 }
 
-function drawLineOnCanvas(startX, startY, endX, endY, ctx, dash = []) {
-  ctx.lineWidth = 2;
-  ctx.strokeStyle = 'white';
-
-  ctx.beginPath();
-  ctx.setLineDash(dash);
-  ctx.moveTo(startX, startY);
-  ctx.lineTo(endX, endY);
-  ctx.closePath();
-  ctx.stroke();
-}
-
 function drawTextOnCanvas(data, ctx, highlight = false) {
   const { color, font, left, size, stroke, top, txt } = data;
 
   ctx.lineWidth = LINE_WIDTH;
-  ctx.strokeStyle = highlight ? HIGHLIGHT_COLOR : stroke;
+  ctx.strokeStyle = stroke;
   ctx.fillStyle = color;
   ctx.font = `${size}px ${font}`;
   ctx.textBaseline = TEXT_BASE_LINE;
+
+  if (highlight) drawHighlightRect(ctx, data);
 
   ctx.fillText(txt, left, top);
   ctx.strokeText(txt, left, top);
@@ -54,6 +40,19 @@ function drawMultiTxtOnCanvas(data, ctx, highlightTextId = -1) {
       drawTextOnCanvas(element, ctx);
     }
   });
+}
+
+function drawHighlightRect(ctx, data) {
+  const { font, left, size, top, txt } = data;
+  const measures = measureTxt(font, size, txt);
+  const width = Math.floor(measures.width);
+
+  ctx.save();
+
+  ctx.strokeStyle = HIGHLIGHT_COLOR;
+  ctx.rect(left - 10, top - size / 2 - 10, width + 20, size + 20);
+  ctx.stroke();
+  ctx.restore();
 }
 
 function getCanvasCtx() {
