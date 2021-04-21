@@ -179,22 +179,36 @@ body.modal-open .main-screen {
   font-family: inherit;
 }
 
+.editor-stickers-container {
+  padding: 10px 0;
+}
+
+.editor-actions {
+  justify-content: center;
+}
+
 .editor-actions .btn-action {
   background-color: #FF9826;
   border-radius: 2.25rem;
   color: white;
   font-family: roboto-regular, sans-serif;
   font-size: 1rem;
+  flex: 40%;
   height: auto;
-  padding: 0.5rem 1rem;
-  width: auto;
+  margin: 5px;
+  padding: 0.5rem 0;
+  max-width: 150px;
 }
 
 /* MEDIA QUERIES */
 
 /* small */
 
-@media (min-width: 576px) {}
+@media (min-width: 576px) {
+  .editor-actions .btn-action {
+    max-width: 100px;
+  }
+}
 
 /* medium */
 
@@ -234,4 +248,8 @@ body.modal-open .main-screen {
 
 /* xx-large */
 
-@media (min-width: 1400px) {}
+@media (min-width: 1400px) {
+  .editor-actions {
+    justify-content: space-between;
+  }
+}
