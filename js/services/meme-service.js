@@ -118,18 +118,24 @@ function getDefaultMemeObj() {
   }
 }
 
+function getSavedMemes() {
+  return loadFromStorage(MEMES_DB_KEY);
+}
+
 function getSelectedLine() {
   if (gMeme.lines.length === 0) return null;
 
   return JSON.parse(JSON.stringify(gMeme.lines[gMeme.selectedLineId]));
 }
 
-function saveMeme() {
+function saveMeme(meme, dataUrl) {
   const memes = loadFromStorage(MEMES_DB_KEY);
 
-  memes.push(gMeme);
+  meme = JSON.parse(JSON.stringify(meme));
+  meme.dataUrl = dataUrl;
+  memes.push(meme);
 
-  saveToStorage(MEMES_DB_KEY, gMeme);
+  saveToStorage(MEMES_DB_KEY, memes);
 }
 
 function _calcLineLeftValue(txt, align, size, font) {

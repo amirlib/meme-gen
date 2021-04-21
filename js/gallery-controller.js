@@ -4,7 +4,7 @@ const GALLERY_SELECTOR = '.cards-gallery';
 function onInit() {
   initKeywords();
   initEditor();
-  renderGallery();
+  renderImgs();
   renderFilterList();
 }
 
@@ -24,8 +24,7 @@ function renderFilterList() {
   elFilterList.innerHTML = strHTML.join('');
 }
 
-function renderGallery() {
-  const elGallery = document.querySelector(GALLERY_SELECTOR);
+function renderImgs() {
   const imgs = getImgs();
   const strHTML = imgs.map(img => {
     return `  
@@ -34,24 +33,49 @@ function renderGallery() {
       </div>`;
   });
 
-  elGallery.innerHTML = strHTML.join('');
+  renderToGallery(strHTML);
+}
+
+function renderMemes() {
+  const memes = getSavedMemes();
+
+  if (!Array.isArray(memes)) return;
+
+  const strHTML = memes.map(meme => {
+    return `  
+      <div class="card" onclick="onOpenEditor('${meme.id}')">
+        <img src="${meme.dataUrl}" alt="meme-${meme.id}">
+      </div>`;
+  });
+
+  renderToGallery(strHTML);
+}
+
+function renderToGallery(html) {
+  updateElAttr(GALLERY_SELECTOR, 'innerHTML', html.join(''));
 }
 
 function renderSearchBar(filter) {
   updateElAttr('input[name="filterMeme"]', 'value', filter);
 }
 
-function onFilterMeme(filter) {
+function onImgFilter(filter) {
   changeImgFiler(filter);
-  renderGallery();
+  renderImgs();
   renderFilterList();
 }
 
 function onFilterSearch(filter) {
   changeImgFiler(filter);
   renderSearchBar(filter);
-  renderGallery();
+  renderImgs();
   renderFilterList();
+}
+
+function onOpenSavedMemes() {
+  const memes = getSavedMemes();
+
+  renderMemes(memes);
 }
 
 function _calcFilterFontSizeByClicks(clicks) {

@@ -101,7 +101,9 @@ function onRemoveLine() {
 }
 
 function onSaveMeme() {
-  saveMeme(getCurrentMeme());
+  const dataUrl = getCanvasData(getCanvas());
+
+  saveMeme(getCurrentMeme(), dataUrl);
 }
 
 function renderEditor() {

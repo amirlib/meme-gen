@@ -15,8 +15,7 @@ function getCanvasCtx() {
   return gCtx;
 }
 
-function renderCanvas() {
-  const meme = getCurrentMeme();
+function renderCanvas(meme = getCurrentMeme()) {
   const imgMeme = getImgById(meme.selectedImgId);
   const img = new Image();
 
