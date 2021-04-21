@@ -100,9 +100,8 @@ function _resetDragAndDropObj() {
 
 function _isLineHit(pos, line) {
   const { left, size, top, txt } = line
-  const height = size;
   const width = Math.floor(gCtx.measureText(txt).width);
 
   // because text is written middle from the top value so the calculation must contain the correct start point
-  return (pos.x >= left && pos.x <= left + width && pos.y >= top - size / 2 - height && pos.y <= top + size / 2);
+  return (pos.x >= left && pos.x <= left + width && pos.y >= top - size / 2 && pos.y <= top + size / 2);
 }
