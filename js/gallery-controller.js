@@ -57,7 +57,7 @@ function onOpenEditorWithMeme(memeId) {
   // meme was not found => gMeme was not updated
   if (!meme) return;
 
-  removeClass(REMOVE_BUT_SELECTOR, 'hide');
+  showDeleteMemeBut();
   renderEditor();
   openEditor();
 }
@@ -87,6 +87,7 @@ function renderSearchBar(filter) {
 
 function onCloseEditor() {
   document.body.classList.remove('modal-open');
+  hideDeleteMemeBut();
   closeEditor();
 }
 
@@ -106,12 +107,20 @@ function onFilterSearch(filter) {
 function onOpenSavedMemes() {
   const memes = getSavedMemes();
 
+  onCloseEditor();
   renderMemes(memes);
 }
 
 function closeEditor() {
-  addClass(REMOVE_BUT_SELECTOR, 'hide');
   updateElStyleAttr(EDITOR_SELECTOR, 'display', 'none');
+}
+
+function showDeleteMemeBut() {
+  removeClass(REMOVE_BUT_SELECTOR, 'hide');
+}
+
+function hideDeleteMemeBut() {
+  addClass(REMOVE_BUT_SELECTOR, 'hide');
 }
 
 function openEditor() {
