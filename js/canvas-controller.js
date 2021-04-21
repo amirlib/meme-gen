@@ -99,8 +99,15 @@ function _resetDragAndDropObj() {
 }
 
 function _isLineHit(pos, line) {
-  const { left, size, top, txt } = line
-  const width = Math.floor(gCtx.measureText(txt).width);
+  const { font, left, size, top, txt } = line;
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  ctx.lineWidth = 2;
+  ctx.font = `${size}px ${font}`;
+  ctx.textBaseline = 'middle';
+
+  const width = Math.floor(ctx.measureText(txt).width);
 
   // because text is written middle from the top value so the calculation must contain the correct start point
   return (pos.x >= left && pos.x <= left + width && pos.y >= top - size / 2 && pos.y <= top + size / 2);
