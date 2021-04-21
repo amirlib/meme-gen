@@ -1,5 +1,6 @@
 const FILTER_LIST_SELECTOR = '.filter-list-container';
 const GALLERY_SELECTOR = '.cards-gallery';
+const REMOVE_BUT_SELECTOR = '.btn-remove-meme';
 
 function onInit() {
   initKeywords();
@@ -53,8 +54,10 @@ function onOpenEditorWithMeme(memeId) {
 
   const meme = updateCurrentMemeById(memeId);
 
+  // meme was not found => gMeme was not updated
   if (!meme) return;
-  
+
+  removeClass(REMOVE_BUT_SELECTOR, 'hide');
   renderEditor();
   openEditor();
 }
@@ -107,6 +110,7 @@ function onOpenSavedMemes() {
 }
 
 function closeEditor() {
+  addClass(REMOVE_BUT_SELECTOR, 'hide');
   updateElStyleAttr(EDITOR_SELECTOR, 'display', 'none');
 }
 

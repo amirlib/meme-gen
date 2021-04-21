@@ -93,6 +93,11 @@ function onRemoveLine() {
   renderEditor();
 }
 
+function onRemoveMeme() {
+  removeSavedMeme();
+  onCloseEditor();
+}
+
 function onSaveMeme() {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');

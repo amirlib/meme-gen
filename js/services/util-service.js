@@ -1,5 +1,21 @@
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 
+function addClass(selector, name) {
+  const el = document.querySelector(selector);
+
+  if (!el) return;
+
+  el.classList.add(name);
+}
+
+function removeClass(selector, name) {
+  const el = document.querySelector(selector);
+
+  if (!el) return;
+
+  el.classList.remove(name);
+}
+
 function calcImgRatio(srcWidth, srcHeight, maxWidth, maxHeight) {
   return Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
 }
@@ -11,19 +27,19 @@ function calcImgDimensions(srcWidth, srcHeight, maxWidth, maxHeight) {
 }
 
 function updateElAttr(selector, key, value) {
-  const elEditor = document.querySelector(selector);
+  const el = document.querySelector(selector);
 
-  if (!elEditor) return;
+  if (!el) return;
 
-  elEditor[key] = value;
+  el[key] = value;
 }
 
 function updateElStyleAttr(selector, key, value) {
-  const elEditor = document.querySelector(selector);
+  const el = document.querySelector(selector);
 
-  if (!elEditor) return;
+  if (!el) return;
 
-  elEditor.style[key] = value;
+  el.style[key] = value;
 }
 
 function getRandomInt(min, max) {

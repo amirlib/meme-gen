@@ -137,6 +137,16 @@ function getSelectedLine() {
   return JSON.parse(JSON.stringify(gMeme.lines[gMeme.selectedLineId]));
 }
 
+function removeSavedMeme() {
+  const memes = loadFromStorage(MEMES_DB_KEY);
+  const memeIdx = memes.findIndex(meme => meme.id === gMeme.id);
+
+  if (memeIdx === -1) return;
+
+  memes.splice(memeIdx, 1);
+  saveToStorage(MEMES_DB_KEY, memes);
+}
+
 function saveMeme(meme, dataUrl) {
   const memes = loadFromStorage(MEMES_DB_KEY);
 
