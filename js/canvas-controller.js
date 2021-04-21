@@ -1,6 +1,6 @@
 var gCanvas;
 var gCtx;
-var gSelectedLineIdx = -1;
+var gDragAndDrop = _resetDragAndDropObj();
 
 function initCanvas() {
   gCanvas = document.querySelector('.meme-editor-modal canvas');
@@ -35,18 +35,49 @@ function renderCanvas(meme, ctx, isHighlight = true, callback) {
 function onCanvasMouseDown() {
   const { lines, selectedLineId } = getCurrentMeme();
   const pos = getEvPos(event);
-  const firstLineId = selectedLineId;
-  let currentLine = selectedLineId;
 
   lines.forEach((line, index) => {
     if (_isLineHit(pos, line)) {
-      currentLine = index;
+      gDragAndDrop.lineId = index;
+      gDragAndDrop.lastX = pos.x;
+      gDragAndDrop.lastY = pos.y;
 
       updateSelectedLineId(index);
     }
   });
 
-  if (firstLineId != currentLine) renderEditor();
+  if (gDragAndDrop.lineId !== -1) renderEditor();
+}
+
+function onCanvasMouseMove() {
+  if (gDragAndDrop.lineId === -1) return;
+
+  const pos = getEvPos(event);
+  const dx = pos.x - gDragAndDrop.lastX;
+  const dy = pos.y - gDragAndDrop.lastY;
+
+  gDragAndDrop.lastX = pos.x;
+  gDragAndDrop.lastY = pos.y;
+
+  updateSelectedLinePos(dx, dy);
+  renderCanvas(getCurrentMeme(), getCanvasCtx());
+}
+
+function onCanvasMouseUp() {
+  gDragAndDrop = _resetDragAndDropObj();
+
+}
+
+function onCanvasMouseOut() {
+  gDragAndDrop = _resetDragAndDropObj();
+}
+
+function _resetDragAndDropObj() {
+  return {
+    lastX: -1,
+    lastY: -1,
+    lineId: -1,
+  };
 }
 
 function _isLineHit(pos, line) {

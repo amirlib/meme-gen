@@ -67,10 +67,28 @@ function updateSelectedLineFontSize(diff) {
   gMeme.lines[gMeme.selectedLineId].size = size;
 }
 
+function updateSelectedLinePos(diffX, diffY) {
+  updateSelectedLineLeft(diffX);
+  updateSelectedLineTop(diffY);
+}
+
 function updateSelectedLineStroke(stroke) {
   if (gMeme.lines.length === 0) return;
 
   gMeme.lines[gMeme.selectedLineId].stroke = stroke;
+}
+
+function updateSelectedLineLeft(diff) {
+  if (gMeme.lines.length === 0) return;
+
+  const img = getImgById(gMeme.selectedImgId);
+  const canvasSize = calcCanvasDimensions(img.size.width, img.size.height);
+  let left = gMeme.lines[gMeme.selectedLineId].left + diff;
+
+  if (left < MIN_LEFT_VALUE) left = MIN_LEFT_VALUE;
+  if (left > canvasSize.width - MIN_LEFT_VALUE) left = canvasSize.width - MIN_LEFT_VALUE;
+
+  gMeme.lines[gMeme.selectedLineId].left = left;
 }
 
 function updateSelectedLineTop(diff) {
