@@ -1,7 +1,10 @@
+const MEMES_DB_KEY = 'memesDb';
 const MIN_LEFT_VALUE = 20;
 const MIN_TOP_VALUE = 30;
 
 var gMeme = getDefaultMemeObj();
+
+_initMemeService();
 
 function addNewLine() {
   gMeme.lines.push(
@@ -120,6 +123,14 @@ function getSelectedLine() {
   return JSON.parse(JSON.stringify(gMeme.lines[gMeme.selectedLineId]));
 }
 
+function saveMeme() {
+  const memes = loadFromStorage(MEMES_DB_KEY);
+
+  memes.push(gMeme);
+
+  saveToStorage(MEMES_DB_KEY, gMeme);
+}
+
 function _calcLineLeftValue(txt, align, size, font) {
   if (align === 'left') return MIN_LEFT_VALUE;
 
@@ -153,4 +164,10 @@ function _calcLineTopValue() {
   if (gMeme.lines.length === 1) return canvasSize.height - MIN_TOP_VALUE;
 
   return canvasSize.height / 2;
+}
+
+function _initMemeService() {
+  const memes = loadFromStorage(MEMES_DB_KEY);
+
+  if (!memes) saveToStorage(MEMES_DB_KEY, []);
 }

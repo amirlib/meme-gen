@@ -100,6 +100,10 @@ function onRemoveLine() {
   renderEditor();
 }
 
+function onSaveMeme() {
+  saveMeme(getCurrentMeme());
+}
+
 function renderEditor() {
   renderCanvas();
   renderLineInput();

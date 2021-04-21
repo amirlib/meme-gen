@@ -49,3 +49,14 @@ function getEvPos(ev) {
 
   return pos;
 }
+
+function makeId(length = 5) {
+  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const id = '';
+
+  for (let i = 0; i < length; i++) {
+    id += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+
+  return id;
+}

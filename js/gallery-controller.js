@@ -5,6 +5,7 @@ function onInit() {
   initKeywords();
   initEditor();
   renderGallery();
+  renderFilterList();
 }
 
 function renderFilterList() {
@@ -34,8 +35,6 @@ function renderGallery() {
   });
 
   elGallery.innerHTML = strHTML.join('');
-
-  renderFilterList();
 }
 
 function renderSearchBar(filter) {
@@ -45,12 +44,14 @@ function renderSearchBar(filter) {
 function onFilterMeme(filter) {
   changeImgFiler(filter);
   renderGallery();
+  renderFilterList();
 }
 
 function onFilterSearch(filter) {
   changeImgFiler(filter);
   renderSearchBar(filter);
   renderGallery();
+  renderFilterList();
 }
 
 function _calcFilterFontSizeByClicks(clicks) {
