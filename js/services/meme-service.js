@@ -82,7 +82,7 @@ function updateSelectedLineLeft(diff) {
   if (gMeme.lines.length === 0) return;
 
   const img = getImgById(gMeme.selectedImgId);
-  const canvasSize = calcCanvasDimensions(img.size.width, img.size.height);
+  const canvasSize = getCanvasSizeByImg(img.size.width, img.size.height);
   let left = gMeme.lines[gMeme.selectedLineId].left + diff;
 
   if (left < MIN_LEFT_VALUE) left = MIN_LEFT_VALUE;
@@ -95,7 +95,7 @@ function updateSelectedLineTop(diff) {
   if (gMeme.lines.length === 0) return;
 
   const img = getImgById(gMeme.selectedImgId);
-  const canvasSize = calcCanvasDimensions(img.size.width, img.size.height);
+  const canvasSize = getCanvasSizeByImg(img.size.width, img.size.height);
   let top = gMeme.lines[gMeme.selectedLineId].top + diff;
 
   if (top < MIN_TOP_VALUE) top = MIN_TOP_VALUE;
@@ -187,7 +187,7 @@ function _calcLineLeftValue(txt, align, size, font) {
 
   const lineMeasures = measureTxt(font, size, txt);
   const img = getImgById(gMeme.selectedImgId);
-  const canvasSize = calcCanvasDimensions(img.size.width, img.size.height);
+  const canvasSize = getCanvasSizeByImg(img.size.width, img.size.height);
 
   if (align === 'center') return (canvasSize.width - Math.floor(lineMeasures.width)) / 2;
 
@@ -199,7 +199,7 @@ function _calcLineTopValue() {
   if (gMeme.lines.length === 0) return MIN_TOP_VALUE;
 
   const img = getImgById(gMeme.selectedImgId);
-  const canvasSize = calcCanvasDimensions(img.size.width, img.size.height);
+  const canvasSize = getCanvasSizeByImg(img.size.width, img.size.height);
 
   if (gMeme.lines.length === 1) return canvasSize.height - MIN_TOP_VALUE;
 

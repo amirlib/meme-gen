@@ -13,7 +13,7 @@ function renderCanvas(meme, ctx, isHighlight = true, callback) {
 
   img.src = imgMeme.url;
   img.onload = () => {
-    const size = calcCanvasDimensions(img.width, img.height);
+    const size = getCanvasSizeByImg(img.width, img.height);
     const highlightId = isHighlight ? meme.selectedLineId : -1;
 
     resizeCanvas(ctx.canvas, size);

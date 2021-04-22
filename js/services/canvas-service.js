@@ -1,24 +1,25 @@
 const CANVAS_CONTAINER_SELECTOR = '.editor-canvas-container';
 const HIGHLIGHT_COLOR = 'red';
 const LINE_WIDTH = 2;
+const MAX_IMAGE_HEIGHT = 450;
 const TEXT_BASE_LINE = 'middle';
 
 var gCtx;
 
-function calcCanvasDimensions(srcWidth, srcHeight) {
+function getCanvasSizeByImg(imgWidth, imgHeight) {
   const elContainer = document.querySelector(CANVAS_CONTAINER_SELECTOR);
-  const maxHeight = MAX_IMAGE_HEIGHT > elContainer.offsetHeight ? elContainer.offsetHeight : MAX_IMAGE_HEIGHT;
-  const maxWidth = elContainer.offsetWidth;
+  const maxCanvasHeight = MAX_IMAGE_HEIGHT > elContainer.offsetHeight ? elContainer.offsetHeight : MAX_IMAGE_HEIGHT;
+  const maxCanvasWidth = elContainer.offsetWidth;
 
-  return calcImgDimensions(srcWidth, srcHeight, maxWidth, maxHeight);
+  return calcImgSizeKeepRatio(imgWidth, imgHeight, maxCanvasWidth, maxCanvasHeight);
 }
 
 function drawImgOnCanvas(img, ctx) {
   ctx.drawImage(img, 0, 0, ctx.canvas.width, ctx.canvas.height);
 }
 
-function drawTextOnCanvas(data, ctx, highlight = false) {
-  const { color, font, left, size, stroke, top, txt } = data;
+function drawTextOnCanvas(line, ctx, highlight = false) {
+  const { color, font, left, size, stroke, top, txt } = line;
 
   ctx.lineWidth = LINE_WIDTH;
   ctx.strokeStyle = stroke;
@@ -26,24 +27,24 @@ function drawTextOnCanvas(data, ctx, highlight = false) {
   ctx.font = `${size}px ${font}`;
   ctx.textBaseline = TEXT_BASE_LINE;
 
-  if (highlight) drawHighlightRect(ctx, data);
+  if (highlight) drawHighlightRectAroundTxt(ctx, line);
 
   ctx.fillText(txt, left, top);
   ctx.strokeText(txt, left, top);
 }
 
-function drawMultiTxtOnCanvas(data, ctx, highlightTextId = -1) {
-  data.forEach((element, index) => {
+function drawMultiTxtOnCanvas(lines, ctx, highlightTextId = -1) {
+  lines.forEach((line, index) => {
     if (index === highlightTextId) {
-      drawTextOnCanvas(element, ctx, true);
+      drawTextOnCanvas(line, ctx, true);
     } else {
-      drawTextOnCanvas(element, ctx);
+      drawTextOnCanvas(line, ctx);
     }
   });
 }
 
-function drawHighlightRect(ctx, data) {
-  const { font, left, size, top, txt } = data;
+function drawHighlightRectAroundTxt(ctx, line) {
+  const { font, left, size, top, txt } = line;
   const measures = measureTxt(font, size, txt);
   const width = Math.floor(measures.width);
 

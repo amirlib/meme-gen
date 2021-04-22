@@ -1,5 +1,4 @@
 const EDITOR_SELECTOR = '.meme-editor-modal';
-const MAX_IMAGE_HEIGHT = 450;
 
 function initEditor() {
   initCanvas();

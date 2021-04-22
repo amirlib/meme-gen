@@ -16,14 +16,10 @@ function removeClass(selector, name) {
   el.classList.remove(name);
 }
 
-function calcImgRatio(srcWidth, srcHeight, maxWidth, maxHeight) {
-  return Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
-}
+function calcImgSizeKeepRatio(originalWidth, originalHeight, maxWidth, maxHeight) {
+  const ratio = Math.min(maxWidth / originalWidth, maxHeight / originalHeight);
 
-function calcImgDimensions(srcWidth, srcHeight, maxWidth, maxHeight) {
-  const ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
-
-  return { width: srcWidth * ratio, height: srcHeight * ratio };
+  return { width: originalWidth * ratio, height: originalHeight * ratio };
 }
 
 function updateElAttr(selector, key, value) {
