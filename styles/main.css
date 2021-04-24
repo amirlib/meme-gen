@@ -77,14 +77,16 @@ body.modal-open .main-screen {
 }
 
 .cards-gallery {
-  gap: 20px;
+  column-count: 2;
+  column-gap: 20px;
+  column-width: 170px;
 }
 
 /* card */
 
 .card {
-  height: 170px;
-  width: 170px;
+  height: 100%;
+  width: 100%;
 }
 
 .card img {
@@ -205,6 +207,9 @@ body.modal-open .main-screen {
 /* small */
 
 @media (min-width: 576px) {
+  .cards-gallery {
+    column-count: 3;
+  }
   .editor-actions .btn-action {
     max-width: 100px;
   }
@@ -219,15 +224,17 @@ body.modal-open .main-screen {
   .filter-section {
     padding-bottom: 30px;
   }
-  .card {
-    height: 210px;
-    width: 210px;
+  .cards-gallery {
+    column-count: 4;
   }
 }
 
 /* large */
 
 @media (min-width: 992px) {
+  .cards-gallery {
+    column-count: 5;
+  }
   .meme-editor-modal {
     flex-direction: row;
   }
@@ -244,7 +251,11 @@ body.modal-open .main-screen {
 
 /* x-large */
 
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) {
+  .cards-gallery {
+    column-count: 6;
+  }
+}
 
 /* xx-large */
 
