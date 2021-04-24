@@ -62,7 +62,6 @@ body.modal-open .main-screen {
   display: block;
   padding: 12px 24px;
   width: 100%;
-  outline: none;
 }
 
 .filter-section button {
