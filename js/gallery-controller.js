@@ -88,7 +88,7 @@ function renderToGallery(html) {
   updateElAttr(GALLERY_SELECTOR, 'innerHTML', html.join(''));
 }
 
-function renderSearchBar(filter) {
+function renderSearchBox(filter) {
   updateElAttr('input[name="filterMeme"]', 'value', filter);
 }
 
@@ -110,7 +110,7 @@ function onImgFilter(filter) {
 
 function onFilterSearch(filter) {
   changeImgFiler(filter);
-  renderSearchBar(filter);
+  renderSearchBox(filter);
   renderImgs();
   renderFilterList();
 }

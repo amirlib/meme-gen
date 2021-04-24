@@ -90,8 +90,10 @@
 
     <main class="main-content flex column">
       <section class="filter-section">
-        <input type="text" name="filterMeme" placeholder="Search" oninput="onImgFilter(value)">
-
+        <div class="search-box flex">
+          <button onclick="onResetSearchBox()">X</button>
+          <input type="text" name="filterMeme" placeholder="Search" oninput="onImgFilter(value)">
+        </div>
         <div class="filter-list-container flex wrap justify-center"></div>
       </section>
 

@@ -55,13 +55,19 @@ body.modal-open .main-screen {
   padding-bottom: 20px;
 }
 
-.filter-section input {
-  border: 1px #E5E5E5 solid;
+.search-box {
+  background-color: white;
   border-radius: 81px;
   color: #989898;
-  display: block;
-  padding: 12px 24px;
+  padding: 12px 16px;
   width: 100%;
+}
+
+.filter-section input {
+  border: 1px white solid;
+  color: inherit;
+  display: block;
+  flex: 1;
 }
 
 .filter-section button {
