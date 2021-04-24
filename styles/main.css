@@ -162,6 +162,17 @@ body.modal-open .main-screen {
   flex: 1;
 }
 
+.editor-content-actions input[type="color"] {
+  height: 0;
+  padding: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.editor-content-actions label {
+  cursor: pointer;
+}
+
 .editor-content-actions select {
   color: #989898;
   font-size: .75rem;
