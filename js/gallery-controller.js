@@ -3,29 +3,13 @@ const GALLERY_SELECTOR = '.cards-gallery';
 const REMOVE_BUT_SELECTOR = '.btn-remove-meme';
 
 var gIsEditorOpen = false;
-var gViewMode = 'gallery';
+var gViewMode = 'gallery'; // gallery, memes
 
 function onInit() {
   initKeywords();
   initEditor();
   renderImgs();
   renderFilterList();
-}
-
-function renderFilterList() {
-  const elFilterList = document.querySelector(FILTER_LIST_SELECTOR);
-  const keywords = getDisplayKeywords();
-  const strHTML = keywords.map(keyword => {
-    const { key, clicks } = keyword;
-    const fontSize = _calcFilterFontSizeByClicks(clicks);
-
-    return `  
-      <button type=button" class="btn-filter" onclick="onFilterSearch('${key}')" style="font-size: ${fontSize}rem;">
-        ${key}
-      </button>`;
-  });
-
-  elFilterList.innerHTML = strHTML.join('');
 }
 
 function renderImgs() {
@@ -88,10 +72,6 @@ function renderToGallery(html) {
   updateElAttr(GALLERY_SELECTOR, 'innerHTML', html.join(''));
 }
 
-function renderSearchBox(filter) {
-  updateElAttr('input[name="filterMeme"]', 'value', filter);
-}
-
 function onCloseEditor() {
   document.body.classList.remove('modal-open');
   hideDeleteMemeBut();
@@ -102,17 +82,13 @@ function onCloseEditor() {
   if (gViewMode === 'memes') onOpenSavedMemes();
 }
 
-function onImgFilter(filter) {
-  changeImgFiler(filter);
-  renderImgs();
-  renderFilterList();
+function onImgSearchInput(search) {
+  _searchImg(search);
 }
 
-function onFilterSearch(filter) {
-  changeImgFiler(filter);
-  renderSearchBox(filter);
-  renderImgs();
-  renderFilterList();
+function onImgSearchFilterClick(search) {
+  renderSearchBoxValue(search);
+  _searchImg(search);
 }
 
 function onOpenSavedMemes() {
@@ -129,6 +105,10 @@ function onOpenSavedMemes() {
   renderMemes(memes);
 }
 
+function onResetSearchBox() {
+  onImgSearchFilterClick('');
+}
+
 function closeEditor() {
   updateElStyleAttr(EDITOR_SELECTOR, 'display', 'none');
 }
@@ -143,6 +123,26 @@ function hideDeleteMemeBut() {
 
 function openEditor() {
   updateElStyleAttr(EDITOR_SELECTOR, 'display', 'flex');
+}
+
+function renderFilterList() {
+  const elFilterList = document.querySelector(FILTER_LIST_SELECTOR);
+  const keywords = getDisplayKeywords();
+  const strHTML = keywords.map(keyword => {
+    const { key, clicks } = keyword;
+    const fontSize = _calcFilterFontSizeByClicks(clicks);
+
+    return `  
+      <button type=button" class="btn-filter" onclick="onImgSearchFilterClick('${key}')" style="font-size: ${fontSize}rem;">
+        ${key}
+      </button>`;
+  });
+
+  elFilterList.innerHTML = strHTML.join('');
+}
+
+function renderSearchBoxValue(search) {
+  updateElAttr('input[name="searchImg"]', 'value', search);
 }
 
 function _calcFilterFontSizeByClicks(clicks) {
@@ -164,4 +164,10 @@ function _initEditorWithImg() {
   addNewLine();
   addNewLine();
   closeEditor();
+}
+
+function _searchImg(search) {
+  changeImgFiler(search);
+  renderFilterList();
+  renderImgs();
 }

@@ -51,7 +51,7 @@ body.modal-open .main-screen {
   padding: 20px 10px;
 }
 
-.filter-section {
+.search-section {
   padding-bottom: 20px;
 }
 
@@ -63,14 +63,14 @@ body.modal-open .main-screen {
   width: 100%;
 }
 
-.filter-section input {
+.search-section input {
   border: 1px white solid;
   color: inherit;
   display: block;
   flex: 1;
 }
 
-.filter-section button {
+.search-section button {
   background-color: inherit;
   border: 0;
   border-radius: 2.25rem;
@@ -237,7 +237,7 @@ body.modal-open .main-screen {
   .main-content {
     padding: 30px;
   }
-  .filter-section {
+  .search-section {
     padding-bottom: 30px;
   }
   .cards-gallery {

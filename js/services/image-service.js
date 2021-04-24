@@ -34,7 +34,6 @@ var gKeywords = {
   putin: { key: 'putin', clicks: 105 },
   scary: { key: 'scary', clicks: 22 },
   toys: { key: 'toys', clicks: 5 },
-
 };
 var gImgs = [
   {
